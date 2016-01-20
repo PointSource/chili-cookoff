@@ -1,13 +1,47 @@
 <div class="vote" *ngIf="chili">
-	<div class="chili-pot">
+	<div class="chili-pot row columns">
 		<div class="pot-label">
 			{{chili.name}}
 		</div>
 	</div>
 
-	<div class="rating row">
-		<div>Spiciness</div>
-		<div>Rate 1 - 5</div>
+	<div class="rating row" *ngFor="#category of categories">
+		<div class="columns small-5">{{category.adjective}}</div>
+		<div class="columns small-7">
+			<div class="row">
+				<div class="columns small-2">
+					<label>
+						1
+						<input type="radio" value="1" name="rating-{{category.id}}">
+					</label>
+				</div>
+				<div class="columns small-2">
+					<label>
+						2
+						<input type="radio" value="2" name="rating-{{category.id}}">
+					</label>
+				</div>
+				<div class="columns small-2">
+					<label>
+						3
+						<input type="radio" value="3" name="rating-{{category.id}}">
+					</label>
+				</div>
+				<div class="columns small-2">
+					<label>
+						4
+						<input type="radio" value="4" name="rating-{{category.id}}">
+					</label>
+				</div>
+				<div class="columns small-2">
+					<label>
+						5
+						<input type="radio" value="5" name="rating-{{category.id}}">
+					</label>
+				</div>
+			</div>
+		</div>
+
 	</div>
 
 </div>

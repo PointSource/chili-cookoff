@@ -1,6 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
 import {Chili} from '../chili/chili';
+import {Category} from './category';
 import {ChiliService} from '../chili/chili.service';
 
 @Component({
@@ -10,6 +11,28 @@ import {ChiliService} from '../chili/chili.service';
 })
 export class VoteComponent implements OnInit {
   public chili: Chili;
+  public categories: Category[] = [
+    {
+      id: 1,
+      name: 'Most Spicy',
+      adjective: 'Spiciness'
+    },
+    {
+      id: 2,
+      name: 'Most Meaty',
+      adjective: 'Meat Content'
+    },
+    {
+      id: 3,
+      name: 'Most Original',
+      adjective: 'Originality'
+    },
+    {
+      id: 4,
+      name: 'Most Tasty',
+      adjective: 'Overall Taste'
+    }
+  ];
 
   constructor(private _chiliService: ChiliService,
     private _routeParams: RouteParams) {

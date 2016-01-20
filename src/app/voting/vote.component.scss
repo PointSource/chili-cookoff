@@ -1,0 +1,14 @@
+.chili-pot {
+	background-image: url(../resources/crock-pot-sketch.jpg);
+	height: 300px;
+	width: 300px;
+	background-size: 300px;
+	background-repeat: no-repeat;
+
+	.pot-label {
+		font-size: 2rem;
+		text-align: center;
+		padding-top: 90px;
+		line-height: 2rem;
+	}
+}
