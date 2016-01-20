@@ -1,4 +1,4 @@
-export interface Hero {
+export interface Chili {
 	id: number;
 	name: string;
 }

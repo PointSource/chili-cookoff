@@ -1,6 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
-import {Hero} from './hero';
+import {Chili} from './chili';
 import {HeroService} from './hero.service';
 
 @Component({
@@ -10,7 +10,7 @@ import {HeroService} from './hero.service';
   inputs: ['hero']
 })
 export class HeroDetailComponent implements OnInit {
-  public hero: Hero;
+  public hero: Chili;
 
   constructor(private _heroService: HeroService,
     private _routeParams: RouteParams) {

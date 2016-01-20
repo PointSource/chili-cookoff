@@ -2,7 +2,7 @@ import {Component, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {HeroService} from './hero.service';
 import {HeroDetailComponent} from './hero-detail.component';
-import {Hero} from './hero';
+import {Chili} from './chili';
 
 @Component({
   selector: 'my-heroes',
@@ -11,8 +11,8 @@ import {Hero} from './hero';
   directives: [HeroDetailComponent]
 })
 export class HeroesComponent implements OnInit {
-  public heroes: Hero[];
-  public selectedHero: Hero;
+  public heroes: Chili[];
+  public selectedHero: Chili;
 
   constructor(private _heroService: HeroService, private _router: Router) { }
 
@@ -28,5 +28,5 @@ export class HeroesComponent implements OnInit {
     this.getHeroes();
   }
 
-  onSelect(hero: Hero) { this.selectedHero = hero; }
+  onSelect(hero: Chili) { this.selectedHero = hero; }
 }

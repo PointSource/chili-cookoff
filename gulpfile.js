@@ -53,9 +53,19 @@ gulp.task('libs', function () {
       .pipe(gulp.dest('dist/lib'));
 });
 
+gulp.task('watch', function() {
+  gulp.watch('./src/**/*.scss', ['css']);
+  gulp.watch('src/**/*.html', ['html']);
+  gulp.watch('src/**/*.ts', ['js']);
+
+});
+
 gulp.task('default', [
-  'js', 'libs', 'html', 
+  'js', 
+  'libs', 
+  'html', 
   'css', 
+  'watch',
   'server'
-  ]);
+]);
 
