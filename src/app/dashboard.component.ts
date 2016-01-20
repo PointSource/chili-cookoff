@@ -18,6 +18,10 @@ export class DashboardComponent implements OnInit {
   }
 
   gotoDetail(hero: Chili) {
-    this._router.navigate(['HeroDetail', { id: hero.id }]);
+    this._router.navigate(['ChiliDetail', { id: hero.id }]);
+  }
+
+  gotoVote(hero: Chili) {
+    this._router.navigate(['ChiliVote', { id: hero.id }]);
   }
 }

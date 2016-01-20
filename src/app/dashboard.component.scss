@@ -6,12 +6,8 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
-h3 {
-  text-align: center; margin-bottom: 0;
-}
 [class*='col-'] {
   padding-right: 20px;
-  padding-bottom: 20px;
 }
 [class*='col-']:last-of-type {
   padding-right: 0;
@@ -20,41 +16,26 @@ h3 {
   margin: 0 0em;
 }
 .col-1-4 {
-  width: 25%;
+  width: 33.33%;
 }
 .module {
-	padding: 20px;
+	padding: 0;
 	text-align: center;
 	color: purple;
-	max-height: 120px;
+	height: 166px;
 	min-width: 120px;
 	background-image: url(../resources/crock-pot-sketch.jpg);
+	background-repeat: no-repeat;
 	background-size: 100%;
 }
 h4 {
   position: relative;
+  padding: 63px 36px;
 }
-.module:hover {
-  background-color: #EEE;
-  cursor: pointer;
-  color: #607d8b;
-}
+
 .grid-pad {
   padding: 10px 0;
 }
 .grid-pad > [class*='col-']:last-of-type {
   padding-right: 20px;
-}
-@media (max-width: 600px) {
-	.module {
-	  font-size: 10px;
-	  max-height: 75px; }
-}
-@media (max-width: 1024px) {
-	.grid {
-	  margin: 0;
-	}
-	.module {
-	  min-width: 60px;
-	}
 }
