@@ -1,14 +1,19 @@
 
 var del = require('del');
 var gulp = require('gulp');
+var filter = require('gulp-filter');
 var rename = require('gulp-rename');
 var ts = require('gulp-typescript');
 var tsProject = ts.createProject('tsconfig.json', {typescript: require('typescript')});
 var connect = require('gulp-connect');
 var sass = require('gulp-sass');
-var livereload = require('gulp-livereload')
+var livereload = require('gulp-livereload');
+var mainBowerFiles = require('main-bower-files');
 
 gulp.task('js', function() {
+
+
+
     var tsResult = tsProject.src()     
       .pipe(ts(tsProject));
     
@@ -38,11 +43,13 @@ gulp.task('clean', function(done) {
 
 
 gulp.task('css', function() {
-  gulp.src('./src/**/*.scss')
+
+  gulp.src('src/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('dist/'))
     .pipe(livereload());
 });
+
 
 
 gulp.task('server', function() {
@@ -53,6 +60,11 @@ gulp.task('server', function() {
 });
 
 gulp.task('libs', function () {
+
+    gulp.src(mainBowerFiles())
+      .pipe(filter('*.js'))
+      .pipe(gulp.dest('./dist/lib'));
+
     return gulp.src([
           'node_modules/angular2/bundles/angular2-polyfills.js',
           'node_modules/systemjs/dist/system.src.js',
@@ -61,12 +73,13 @@ gulp.task('libs', function () {
           'node_modules/angular2/bundles/router.dev.js'   
         ])
       .pipe(gulp.dest('dist/lib'));
+
 });
 
 gulp.task('watch', function() {
 
   livereload.listen();
-  gulp.watch('./src/**/*.scss', ['css']);
+  gulp.watch('src/**/*.scss', ['css']);
   gulp.watch('src/**/*.html', ['html']);
   gulp.watch('src/**/*.ts', ['js']);
 

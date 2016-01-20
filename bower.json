@@ -1,0 +1,22 @@
+{
+  "name": "chili-cookoff",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Valerie Graybeal <valerie.graybeal@pointsource.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation-sites": "^6.1.1"
+  }
+}
