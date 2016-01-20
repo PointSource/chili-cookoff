@@ -1,14 +1,15 @@
 import {Injectable} from 'angular2/core';
 import {CHILIS} from '../data/mock-chilis';
 
+
 @Injectable()
-export class HeroService {
-	getHeroes() {
+export class ChiliService {
+	getChilis() {
 		return Promise.resolve(CHILIS);
 	}
 
-	getHero(id: number) {
+	getChili(id: number) {
     return Promise.resolve(CHILIS)
-      .then(heroes => heroes.filter(h => h.id === id)[0]);
+      .then(chilis => chilis.filter(h => h.id === id)[0]);
 	}
 }

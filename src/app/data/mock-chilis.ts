@@ -1,8 +1,8 @@
-import { Chili } from '../hero/chili';
+import { Chili } from '../chili/chili';
 
 export var CHILIS: Chili[] = [
   {"id": 11, "name": "Super Chili Blastoff"},
-  {"id": 12, "name": "Veggie Chili Surprise"},
+  {"id": 12, "name": "Veg Chillax Surpriseee"},
   {"id": 13, "name": "Chili Con Carne"},
   {"id": 14, "name": "Tofu Chili"},
   {"id": 15, "name": "12 Bean Extreme Chili"},

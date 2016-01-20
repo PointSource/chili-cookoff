@@ -1,9 +1,11 @@
+import {provide} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
-import {ROUTER_PROVIDERS} from 'angular2/router';
-import {HeroService} from './hero/hero.service';
+import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
+import {ChiliService} from './chili/chili.service';
 import {AppComponent} from './app.component';
 
 bootstrap(AppComponent, [
   ROUTER_PROVIDERS,
-  HeroService
+  ChiliService,
+  provide(LocationStrategy, {useClass: HashLocationStrategy})
 ]);

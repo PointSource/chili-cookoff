@@ -2,13 +2,13 @@
   background-color: #CFD8DC !important;
   color: white;
 }
-.heroes {
+.chilis {
   margin: 0 0 2em 0;
   list-style-type: none;
   padding: 0;
   width: 10em;
 }
-.heroes li {
+.chilis li {
   cursor: pointer;
   position: relative;
   left: 0;
@@ -18,19 +18,19 @@
   height: 1.6em;
   border-radius: 4px;
 }
-.heroes li:hover {
+.chilis li:hover {
   color: #607D8B;
   background-color: #EEE;
   left: .1em;
 }
-.heroes li.selected:hover {
+.chilis li.selected:hover {
   color: white;
 }
-.heroes .text {
+.chilis .text {
   position: relative;
   top: -3px;
 }
-.heroes .badge {
+.chilis .badge {
   display: inline-block;
   font-size: small;
   color: white;

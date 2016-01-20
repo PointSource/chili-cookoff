@@ -1,28 +1,21 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {HeroesComponent} from './hero/heroes.component';
-import {HeroDetailComponent} from './hero/hero-detail.component';
+import {ChilisComponent} from './chili/chilis.component';
 import {DashboardComponent} from './dashboard.component';
-import {HeroService} from './hero/hero.service';
+import {ChiliService} from './chili/chili.service';
 
 @Component({
   selector: 'my-app',
-  template: `
-    <h1>{{title}}</h1>
-    <a [routerLink]="['Dashboard']">Dashboard</a>
-    <a [routerLink]="['Heroes']">Heroes</a>
-    <router-outlet></router-outlet>
-  `,
+  templateUrl: 'app/app.component.html',
   styleUrls: ['app/app.component.css'],
   directives: [ROUTER_DIRECTIVES],
-  providers: [HeroService]
+  providers: [ChiliService]
 })
 @RouteConfig([
   // {path: '/', redirectTo: ['Dashboard'] },
   {path: '/dashboard', name: 'Dashboard', component: DashboardComponent, useAsDefault: true},
-  {path: '/heroes', name: 'Heroes', component: HeroesComponent},
-  {path: '/detail/:id', name: 'HeroDetail', component: HeroDetailComponent}
+  {path: '/chilis', name: 'Chilis', component: ChilisComponent},
 ])
 export class AppComponent {
-  public title = 'Tour of Heroes';
+  public title = 'Tour of Chilis';
 }
