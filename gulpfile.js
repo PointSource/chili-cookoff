@@ -26,6 +26,12 @@ gulp.task('html', function () {
         .pipe(livereload());
 });
 
+gulp.task('resources', function () {
+    return gulp.src('src/resources/*.*')
+        .pipe(gulp.dest('dist/resources'))
+        .pipe(livereload());
+});
+
 gulp.task('clean', function(done) {
   del(['dist'], done);
 });
@@ -40,8 +46,6 @@ gulp.task('css', function() {
 
 
 gulp.task('server', function() {
-
-
   connect.server({
     root: 'dist/',
     port: 8889
@@ -73,6 +77,7 @@ gulp.task('default', [
   'libs', 
   'html', 
   'css', 
+  'resources',
   'server',
   'watch'
 ]);
