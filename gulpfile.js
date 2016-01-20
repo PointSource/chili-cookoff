@@ -6,6 +6,7 @@ var ts = require('gulp-typescript');
 var tsProject = ts.createProject('tsconfig.json', {typescript: require('typescript')});
 var connect = require('gulp-connect');
 var sass = require('gulp-sass');
+var livereload = require('gulp-livereload')
 
 gulp.task('js', function() {
     var tsResult = tsProject.src()     
@@ -15,12 +16,14 @@ gulp.task('js', function() {
       .pipe(rename(function (path) {
         path.dirname = path.dirname.replace('src', '');
       }))
-      .pipe(gulp.dest('dist/'));
+      .pipe(gulp.dest('dist/'))
+      .pipe(livereload());
 });
 
 gulp.task('html', function () {
     return gulp.src('src/**/*.html')
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist'))
+        .pipe(livereload());
 });
 
 gulp.task('clean', function(done) {
@@ -31,11 +34,14 @@ gulp.task('clean', function(done) {
 gulp.task('css', function() {
   gulp.src('./src/**/*.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('dist/'));
+    .pipe(gulp.dest('dist/'))
+    .pipe(livereload());
 });
 
 
 gulp.task('server', function() {
+
+
   connect.server({
     root: 'dist/',
     port: 8889
@@ -54,6 +60,8 @@ gulp.task('libs', function () {
 });
 
 gulp.task('watch', function() {
+
+  livereload.listen();
   gulp.watch('./src/**/*.scss', ['css']);
   gulp.watch('src/**/*.html', ['html']);
   gulp.watch('src/**/*.ts', ['js']);
@@ -65,7 +73,7 @@ gulp.task('default', [
   'libs', 
   'html', 
   'css', 
-  'watch',
-  'server'
+  'server',
+  'watch'
 ]);
 
