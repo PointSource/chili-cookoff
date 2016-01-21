@@ -1,15 +1,14 @@
 
-.module {
-	padding: 0;
+.chili-pot {
 	text-align: center;
-	color: purple;
-	height: 166px;
-	min-width: 120px;
-	background-image: url(../resources/crock-pot-sketch.jpg);
-	background-repeat: no-repeat;
-	background-size: 100%;
-	h4 {
-	  position: relative;
-	  padding: 63px 36px;
+	min-height: 166px;
+	position: relative;
+	.chili-label {
+	  line-height: 1.2rem;
+	  position: absolute;
+	  top: 40%;
+	  text-align: center;
+	  left: 20%;
+	  right: 20%;
 	}
 }
