@@ -1,4 +1,4 @@
-import { Category } from '../chili/category';
+import { Category } from '../voting/category';
 
 export var CATEGORIES: Category[] = [
   {"id": 1, "name": "Spiciest", "adjective": "Spiciness"},

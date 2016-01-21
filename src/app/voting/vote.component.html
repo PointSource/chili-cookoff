@@ -7,15 +7,10 @@
 		</div>
 	</div>
 
-	<div>
-		<button class="expanded button" [disabled]="!allRatingsFilled()">Submit Vote</button>
-	</div>
-
 	<rate-input [(rating)]="ratings[i]"  *ngFor="#category of categories; #i=index"></rate-input>
 
+	<button class="expanded button" [disabled]="!allRatingsFilled()">Submit Vote</button>
 
-	<div>
-		<button class="expanded button secondary" (click)="resetVote()">Reset Vote</button>
-	</div>
+	<button class="expanded button secondary" (click)="resetVote()">Reset Vote</button>
 
 </div>
