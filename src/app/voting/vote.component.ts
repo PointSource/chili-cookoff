@@ -33,6 +33,7 @@ export class VoteComponent implements OnInit {
       adjective: 'Overall Taste'
     }
   ];
+  public enableSubmit = true;
 
   constructor(private _chiliService: ChiliService,
     private _routeParams: RouteParams) {
