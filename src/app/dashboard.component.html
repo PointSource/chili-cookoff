@@ -1,6 +1,6 @@
 <h3>Top Chili Entries</h3>
-<div class="row">
-	<div *ngFor="#chili of chilis" class="columns small-6" (click)="gotoVote(chili)">
+<div class="row small-up-2 medium-up-3">
+	<div *ngFor="#chili of chilis" class="columns" (click)="gotoVote(chili)">
 		<div class="module chili">
 			<h4>{{chili.name}}</h4>
 		</div>
