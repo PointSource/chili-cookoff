@@ -2,9 +2,9 @@ import {Component, OnInit} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
 import {Chili} from '../chili/chili';
 import {Category} from './category';
+import {Rating} from './rating';
 import {ChiliService} from '../chili/chili.service';
 import {RateInputComponent} from './rate-input.component';
-import {Rating} from './rating';
 
 @Component({
   selector: 'vote',
@@ -36,7 +36,6 @@ export class VoteComponent implements OnInit {
       adjective: 'Overall Taste'
     }
   ];
-  public enableSubmit = true;
   public ratings: Rating[] = [];
 
   constructor(private _chiliService: ChiliService,
@@ -51,14 +50,27 @@ export class VoteComponent implements OnInit {
       });
     }
     this.categories.forEach(category => 
-      this.ratings[category.id] = {
+      this.ratings.push({
         'ratingValue': null,
         'category': category
-      });
+      })
+     );
+
   }
 
   resetVote() {
     this.ratings.forEach(rating => rating.ratingValue = null);
+  }
+
+  allRatingsFilled() {
+    var ratingsFilled: number = 0;
+    this.ratings.forEach(rating => {
+      if (rating.ratingValue !== null) {
+        ratingsFilled++;
+      }
+    })
+
+    return ratingsFilled === this.ratings.length;
   }
 }
 

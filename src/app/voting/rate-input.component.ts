@@ -10,8 +10,7 @@ import {Rating} from './rating'
 
 export class RateInputComponent {
 	public rating: Rating;
-
-	public ratingValues = [1,2,3,4,5]
+	public ratingValues: number[] = [1,2,3,4,5];
 
 	updateRating(ratingValue) {
 		this.rating.ratingValue = ratingValue;

@@ -8,10 +8,10 @@
 	</div>
 
 	<div>
-		<button class="expanded button" [disabled]="enableSubmit">Submit Vote</button>
+		<button class="expanded button" [disabled]="!allRatingsFilled()">Submit Vote</button>
 	</div>
 
-	<rate-input [(rating)]="ratings[category.id]"  *ngFor="#category of categories"></rate-input>
+	<rate-input [(rating)]="ratings[i]"  *ngFor="#category of categories; #i=index"></rate-input>
 
 
 	<div>
