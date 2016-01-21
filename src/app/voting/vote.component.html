@@ -11,12 +11,11 @@
 		<button class="expanded button" [disabled]="enableSubmit">Submit Vote</button>
 	</div>
 
-	<div class="rating row" *ngFor="#category of categories">
-		<div class="columns small-5">{{category.adjective}} {{ratings[category.id].ratingValue}}</div>
-		<div class="columns small-7 clearfix">
-			<rate-input [(rating)]="ratings[category.id]"></rate-input>
+	<rate-input [(rating)]="ratings[category.id]"  *ngFor="#category of categories"></rate-input>
 
-		</div>
+
+	<div>
+		<button class="expanded button secondary" (click)="resetVote()">Reset Vote</button>
 	</div>
 
 </div>

@@ -1,4 +1,5 @@
 import {Component} from 'angular2/core';
+import {Rating} from './rating'
 
 @Component({
   selector: 'rate-input',
@@ -8,9 +9,12 @@ import {Component} from 'angular2/core';
 })
 
 export class RateInputComponent {
-	public rating;
+	public rating: Rating;
 
-	updateRating(e) {
-		this.rating.ratingValue = e.target.value;
+	public ratingValues = [1,2,3,4,5]
+
+	updateRating(ratingValue) {
+		this.rating.ratingValue = ratingValue;
 	}
+
 }
