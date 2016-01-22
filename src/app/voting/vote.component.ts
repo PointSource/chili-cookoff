@@ -3,8 +3,10 @@ import {RouteParams} from 'angular2/router';
 import {Chili} from '../chili/chili';
 import {Category} from './category';
 import {Rating} from './rating';
+import {Vote} from './vote';
 import {ChiliService} from '../chili/chili.service';
 import {CategoryService} from './category.service';
+import {VoteService} from './vote.service';
 import {RateInputComponent} from './rate-input.component';
 
 @Component({
@@ -16,10 +18,11 @@ import {RateInputComponent} from './rate-input.component';
 export class VoteComponent implements OnInit {
   public chili: Chili;
   public categories: Category[] = [];
-  public ratings: Rating[] = [];
+  public vote: Vote;
 
   constructor(
     private _chiliService: ChiliService,
+    private _voteService: VoteService,
     private _routeParams: RouteParams,
     private _categoryService: CategoryService) {
   }
@@ -29,35 +32,37 @@ export class VoteComponent implements OnInit {
       let id = +this._routeParams.get('id');
       this._chiliService.getChili(id).then(chili => {
         this.chili = chili
+        this.vote = this._voteService.getVoteForChili(this.chili.id);
+        console.log(this.vote);
       });
     }
 
     this._categoryService.getCategories().then(categories => {
-      this.categories = categories
-      this.categories.forEach(category => 
-        this.ratings.push({
-          'ratingValue': null,
-          'category': category
-        })
-       );
+      this.categories = categories;
     });
 
 
   }
 
   resetVote() {
-    this.ratings.forEach(rating => rating.ratingValue = null);
+    this.vote.ratings.forEach(rating => rating.ratingValue = null);
+  }
+
+  submitRating() {
+    this._voteService.addVote(this.vote);
+
+    this._voteService.getVotes().then(votes => console.log(votes));
   }
 
   allRatingsFilled() {
     var ratingsFilled: number = 0;
-    this.ratings.forEach(rating => {
+    this.vote.ratings.forEach(rating => {
       if (rating.ratingValue !== null) {
         ratingsFilled++;
       }
-    })
+    });
 
-    return ratingsFilled === this.ratings.length;
+    return ratingsFilled === this.vote.ratings.length;
   }
 }
 

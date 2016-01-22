@@ -1,7 +1,7 @@
 <h3>Top Chili Entries</h3>
 <div class="row small-up-2 medium-up-3">
-	<div *ngFor="#chili of chilis" class="columns chili-pot" (click)="gotoVote(chili)">
-		<img src="../resources/crock-pot-sketch.jpg">
+	<div *ngFor="#chili of chilis" class="columns chili-pot" [ngClass]="{voted: hasVotedOn(chili)}" (click)="gotoVote(chili)">
+		<img src="../resources/crock-pot-transp.png">
 		<div class="chili-label">{{chili.name}}</div>
 	</div>
 </div>

@@ -1,15 +1,16 @@
 <div class="vote row columns" *ngIf="chili">
 	<div class="row">
-		<div class="chili-pot columns small-centered">
-			<div class="pot-label">
+		<div class="columns small-centered chili-pot">
+			<img src="../resources/crock-pot-sketch.jpg">
+			<div class="chili-label">
 				{{chili.name}}
 			</div>
 		</div>
 	</div>
 
-	<rate-input [(rating)]="ratings[i]"  *ngFor="#category of categories; #i=index"></rate-input>
+	<rate-input [(rating)]="vote.ratings[i]"  *ngFor="#rating of vote.ratings; #i=index"></rate-input>
 
-	<button class="expanded button" [disabled]="!allRatingsFilled()">Submit Vote</button>
+	<button class="expanded button" [disabled]="!allRatingsFilled()" (click)="submitRating()">Submit Vote</button>
 
 	<button class="expanded button secondary" (click)="resetVote()">Reset Vote</button>
 
