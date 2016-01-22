@@ -4,6 +4,7 @@ import {Chili} from '../chili/chili';
 import {Category} from './category';
 import {Rating} from './rating';
 import {ChiliService} from '../chili/chili.service';
+import {CategoryService} from './category.service';
 import {RateInputComponent} from './rate-input.component';
 
 @Component({
@@ -14,32 +15,13 @@ import {RateInputComponent} from './rate-input.component';
 })
 export class VoteComponent implements OnInit {
   public chili: Chili;
-  public categories: Category[] = [
-    {
-      id: 1,
-      name: 'Most Spicy',
-      adjective: 'Spiciness'
-    },
-    {
-      id: 2,
-      name: 'Most Meaty',
-      adjective: 'Meat Content'
-    },
-    {
-      id: 3,
-      name: 'Most Original',
-      adjective: 'Originality'
-    },
-    {
-      id: 4,
-      name: 'Most Tasty',
-      adjective: 'Overall Taste'
-    }
-  ];
+  public categories: Category[] = [];
   public ratings: Rating[] = [];
 
-  constructor(private _chiliService: ChiliService,
-    private _routeParams: RouteParams) {
+  constructor(
+    private _chiliService: ChiliService,
+    private _routeParams: RouteParams,
+    private _categoryService: CategoryService) {
   }
 
   ngOnInit() {
@@ -49,12 +31,17 @@ export class VoteComponent implements OnInit {
         this.chili = chili
       });
     }
-    this.categories.forEach(category => 
-      this.ratings.push({
-        'ratingValue': null,
-        'category': category
-      })
-     );
+
+    this._categoryService.getCategories().then(categories => {
+      this.categories = categories
+      this.categories.forEach(category => 
+        this.ratings.push({
+          'ratingValue': null,
+          'category': category
+        })
+       );
+    });
+
 
   }
 
