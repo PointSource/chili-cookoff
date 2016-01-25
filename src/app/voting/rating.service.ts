@@ -48,7 +48,6 @@ export class RatingService {
 		});
 	}
 
-	// Creates a new vote if the vote does not exist
 	getRatingSetForChili(chiliId: number) {
 		var ratings:Rating[] = this.ratings.filter(h => 
 			h.chiliId === chiliId
@@ -77,6 +76,15 @@ export class RatingService {
 		var ratings: Rating[] = this.ratings.filter(h =>
 			h.categoryId === categoryId
 		);
+
+		ratings.sort((a, b) => {
+			if (a.ratingValue > b.ratingValue) {
+				return -1;
+			} else if (a.ratingValue < b.ratingValue) {
+				return 1;
+			}
+			return 0;
+		});
 
 		return ratings;
 	}
