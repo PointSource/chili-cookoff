@@ -3,6 +3,7 @@ import {VoteService} from '../voting/vote.service';
 import {Vote} from '../voting/vote';
 import {Category} from '../voting/category';
 import {CategoryService} from '../voting/category.service';
+import {ChiliService} from '../chili/chili.service';
 
 
 @Component({
@@ -13,10 +14,12 @@ export class ResultsComponent implements OnInit {
 	public votes: Vote[];
 	public categories: Category[];
 	public ratingsByCategory = [];
+	public chilisById = {};
 
 	constructor(
 		private _voteService: VoteService, 
-		private _categoryService: CategoryService) {}
+		private _categoryService: CategoryService,
+		private _chiliService: ChiliService) {}
 
 	ngOnInit() {
 		this._voteService.getVotes().then(votes => {
@@ -24,9 +27,10 @@ export class ResultsComponent implements OnInit {
 		});
 		this._voteService.getVotesForAllCategories().then(ratingsByCategory => {
 			this.ratingsByCategory = ratingsByCategory;
-			console.log(this.ratingsByCategory);
 		});
-
+		this._chiliService.getChilisById().then(chilisById => {
+			this.chilisById = chilisById
+		});
 
 	}
 }

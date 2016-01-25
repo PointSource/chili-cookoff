@@ -7,8 +7,7 @@
 		Category {{categoryAndRating.category.name}} id={{categoryAndRating.category.id}} 
 		<div *ngIf="categoryAndRating.ratings.length > 0">
 			<div *ngFor="#ratingAndChili of categoryAndRating.ratings">
-				Chili={{ratingAndChili.chiliId}}
-				Rating={{ratingAndChili.rating.ratingValue}}
+				{{chilisById[ratingAndChili.chiliId].name}}: {{ratingAndChili.rating.ratingValue}}
 			</div>
 		</div>
  	</div>
