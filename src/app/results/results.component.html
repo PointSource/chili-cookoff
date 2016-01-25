@@ -1,13 +1,23 @@
-<div>
-	<h4>View Results</h4>
+<div class="row columns">
+	<h3>Voting Results</h3>
 	<div *ngFor="#vote of votes; #i=index">
 		Vote {{i}}
 	</div>
 	<div *ngFor="#categoryAndRating of ratingsByCategory">
-		Category {{categoryAndRating.category.name}} id={{categoryAndRating.category.id}} 
+		<h4>{{categoryAndRating.category.name}}</h4>
 		<div *ngIf="categoryAndRating.ratings.length > 0">
-			<div *ngFor="#ratingAndChili of categoryAndRating.ratings">
-				{{chilisById[ratingAndChili.chiliId].name}}: {{ratingAndChili.rating.ratingValue}}
+			<div *ngFor="#ratingAndChili of categoryAndRating.ratings" class="row">
+				<div class="columns small-6 chili-pot">
+					<img src="../resources/crock-pot-transp.png">
+					<div class="chili-label">
+						{{chilisById[ratingAndChili.chiliId].name}}
+					</div>
+				</div>
+				<div class="columns small-6 stat">
+					<div class="callout" [ngClass]="{success: ratingAndChili.rating.ratingValue === 5, primary: ratingAndChili.rating.ratingValue === 4, secondary: ratingAndChili.rating.ratingValue < 4}">
+						{{ratingAndChili.rating.ratingValue}}
+					</div>
+				</div>
 			</div>
 		</div>
  	</div>

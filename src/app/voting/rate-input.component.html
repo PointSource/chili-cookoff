@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="columns small-4 rating-label" [ngClass]="{rated: rating.ratingValue !== null}">{{rating.category.adjective}}</div>
+	<div class="columns small-4 rating-label" [ngClass]="{rated: rating.ratingValue !== null}" *ngIf="category">{{category.adjective}}</div>
 	<div class="columns small-8">
 
 		<div class="button-group expanded">

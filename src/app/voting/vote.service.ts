@@ -43,7 +43,7 @@ export class VoteService {
 			categories.forEach(category => {
 				vote.ratings.push({
 					'ratingValue': null,
-					'category': category
+					'categoryId': category.id
 				});
 			});
 		});
@@ -82,7 +82,7 @@ export class VoteService {
 
 		this.votes.forEach(vote => {
 			var categoryRating = vote.ratings.filter(rating =>
-				rating.category.id === categoryId
+				rating.categoryId === categoryId
 			)[0];
 
 			categoryRatings.push({
