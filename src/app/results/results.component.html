@@ -3,12 +3,12 @@
 	<div *ngFor="#vote of votes; #i=index">
 		Vote {{i}}
 	</div>
-	<div *ngFor="#category of categories; #i=index">
-		Category {{category.name}} id={{category.id}} 
-		<div *ngIf="ratingsByCategory[category.id].length > 0">
-			<div *ngFor="#categoryRating of ratingsByCategory[category.id]">
-				Chili={{categoryRating.chiliId}}
-				Rating={{categoryRating.rating.ratingValue}}
+	<div *ngFor="#categoryAndRating of ratingsByCategory">
+		Category {{categoryAndRating.category.name}} id={{categoryAndRating.category.id}} 
+		<div *ngIf="categoryAndRating.ratings.length > 0">
+			<div *ngFor="#ratingAndChili of categoryAndRating.ratings">
+				Chili={{ratingAndChili.chiliId}}
+				Rating={{ratingAndChili.rating.ratingValue}}
 			</div>
 		</div>
  	</div>

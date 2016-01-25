@@ -12,7 +12,7 @@ import {CategoryService} from '../voting/category.service';
 export class ResultsComponent implements OnInit {
 	public votes: Vote[];
 	public categories: Category[];
-	public ratingsByCategory = {};
+	public ratingsByCategory = [];
 
 	constructor(
 		private _voteService: VoteService, 
@@ -21,22 +21,10 @@ export class ResultsComponent implements OnInit {
 	ngOnInit() {
 		this._voteService.getVotes().then(votes => {
 			this.votes = votes
-			this._categoryService.getCategories().then(categories => {
-				this.categories = categories
-				this.categories.forEach(category => {
-					this.ratingsByCategory[category.id] = 
-						this._voteService.getVotesForCategory(category.id);
-				});
-				console.log(this.ratingsByCategory);
-				this.categories.forEach(category => {
-					var categoryRatingList = this.ratingsByCategory[category.id];
-					console.log(categoryRatingList);
-					categoryRatingList.forEach(categoryRating => {
-						console.log(categoryRating.chiliId);
-						console.log(categoryRating.rating);
-					});
-				});
-			});
+		});
+		this._voteService.getVotesForAllCategories().then(ratingsByCategory => {
+			this.ratingsByCategory = ratingsByCategory;
+			console.log(this.ratingsByCategory);
 		});
 
 

@@ -64,8 +64,22 @@ export class VoteService {
 		return vote;
 	}
 
+	getVotesForAllCategories() {
+		var votesForCategories = [];
+		return this._categoryService.getCategories().then(categories => {
+			categories.forEach(category => {
+				votesForCategories.push({
+					ratings: this.getVotesForCategory(category.id),
+					category: category
+				});
+			});
+			return votesForCategories;
+		});
+	}
+
 	getVotesForCategory(categoryId: number) {
 		var categoryRatings = [];
+
 		this.votes.forEach(vote => {
 			var categoryRating = vote.ratings.filter(rating =>
 				rating.category.id === categoryId
