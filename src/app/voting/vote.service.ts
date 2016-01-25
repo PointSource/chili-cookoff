@@ -15,7 +15,9 @@ export class VoteService {
 	}
 
 	addVote(vote: Vote) {
-		this.votes.push(vote);
+		if (!this.hasVote(vote.chiliId)) {
+			this.votes.push(vote);
+		}
 	}
 
 	hasVote(chiliId: number) : boolean {
