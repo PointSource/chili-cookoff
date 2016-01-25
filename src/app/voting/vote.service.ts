@@ -31,30 +31,52 @@ export class VoteService {
 		return hasVote;
 	}
 
+	createVoteForChili(chiliId: number) : Vote {
+		var vote: Vote;
 
+		vote = {
+			chiliId: chiliId,
+			ratings: []
+		}
+		this._categoryService.getCategories().then(categories => {
+
+			categories.forEach(category => {
+				vote.ratings.push({
+					'ratingValue': null,
+					'category': category
+				});
+			});
+		});
+
+		return vote;
+	}
+
+	// Creates a new vote if the vote does not exist
 	getVoteForChili(chiliId: number) : Vote {
 		var vote:Vote = this.votes.filter(h => 
 			h.chiliId === chiliId
 		)[0];
 
-		console.log('getVoteForChili', vote);
 		if (!vote) {
-			vote = {
-				chiliId: chiliId,
-				ratings: []
-			}
-		    this._categoryService.getCategories().then(categories => {
-
-		      	categories.forEach(category => {
-		        	vote.ratings.push({
-		         		'ratingValue': null,
-						'category': category
-			        });
-		      	});
-			});
+			vote = this.createVoteForChili(chiliId);
 		}
 
 		return vote;
+	}
+
+	getVotesForCategory(categoryId: number) {
+		var categoryRatings = [];
+		this.votes.forEach(vote => {
+			var categoryRating = vote.ratings.filter(rating =>
+				rating.category.id === categoryId
+			)[0];
+
+			categoryRatings.push({
+				rating: categoryRating,
+				chiliId: vote.chiliId
+			});
+		});
+		return categoryRatings;
 	}
 
 }

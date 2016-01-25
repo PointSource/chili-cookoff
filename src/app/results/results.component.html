@@ -1,0 +1,15 @@
+<div>
+	<h4>View Results</h4>
+	<div *ngFor="#vote of votes; #i=index">
+		Vote {{i}}
+	</div>
+	<div *ngFor="#category of categories; #i=index">
+		Category {{category.name}} id={{category.id}} 
+		<div *ngIf="ratingsByCategory[category.id].length > 0">
+			<div *ngFor="#categoryRating of ratingsByCategory[category.id]">
+				Chili={{categoryRating.chiliId}}
+				Rating={{categoryRating.rating.ratingValue}}
+			</div>
+		</div>
+ 	</div>
+</div>
