@@ -7,7 +7,7 @@ export class VoteService {
 	public votes: Vote[] = [];
 
 	constructor(
-		private _categoryService: CategoryService,
+		private _categoryService: CategoryService
 	) {};
 
 	getVotes() {

@@ -1,11 +1,9 @@
 import {Component, OnInit} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
 import {Chili} from '../chili/chili';
-import {Category} from './category';
 import {Rating} from './rating';
 import {Vote} from './vote';
 import {ChiliService} from '../chili/chili.service';
-import {CategoryService} from './category.service';
 import {VoteService} from './vote.service';
 import {RateInputComponent} from './rate-input.component';
 
@@ -17,14 +15,12 @@ import {RateInputComponent} from './rate-input.component';
 })
 export class VoteComponent implements OnInit {
   public chili: Chili;
-  public categories: Category[] = [];
   public vote: Vote;
 
   constructor(
     private _chiliService: ChiliService,
     private _voteService: VoteService,
-    private _routeParams: RouteParams,
-    private _categoryService: CategoryService) {
+    private _routeParams: RouteParams) {
   }
 
   ngOnInit() {
@@ -36,11 +32,6 @@ export class VoteComponent implements OnInit {
         console.log(this.vote);
       });
     }
-
-    this._categoryService.getCategories().then(categories => {
-      this.categories = categories;
-    });
-
 
   }
 
