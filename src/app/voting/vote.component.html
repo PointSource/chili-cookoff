@@ -8,7 +8,7 @@
 		</div>
 	</div>
 
-	<rate-input [(rating)]="vote.ratings[i]"  *ngFor="#rating of vote.ratings; #i=index"></rate-input>
+	<rate-input [(rating)]="ratings[i]"  *ngFor="#rating of ratings; #i=index"></rate-input>
 
 	<button class="expanded button" [disabled]="!allRatingsFilled()" (click)="submitRating()">Submit Vote</button>
 

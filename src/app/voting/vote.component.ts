@@ -2,9 +2,8 @@ import {Component, OnInit} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
 import {Chili} from '../chili/chili';
 import {Rating} from './rating';
-import {Vote} from './vote';
 import {ChiliService} from '../chili/chili.service';
-import {VoteService} from './vote.service';
+import {RatingService} from './rating.service';
 import {RateInputComponent} from './rate-input.component';
 
 @Component({
@@ -15,11 +14,11 @@ import {RateInputComponent} from './rate-input.component';
 })
 export class VoteComponent implements OnInit {
   public chili: Chili;
-  public vote: Vote;
+  public ratings: Rating[];
 
   constructor(
     private _chiliService: ChiliService,
-    private _voteService: VoteService,
+    private _ratingService: RatingService,
     private _routeParams: RouteParams) {
   }
 
@@ -28,32 +27,34 @@ export class VoteComponent implements OnInit {
       let id = +this._routeParams.get('id');
       this._chiliService.getChili(id).then(chili => {
         this.chili = chili
-        this.vote = this._voteService.getVoteForChili(this.chili.id);
-        console.log(this.vote);
+        this._ratingService.getRatingSetForChili(this.chili.id).then(ratings => {
+          
+          this.ratings = ratings
+          console.log(this.ratings);
+        }
+        );
       });
     }
 
   }
 
   resetVote() {
-    this.vote.ratings.forEach(rating => rating.ratingValue = null);
+    this.ratings.forEach(rating => rating.ratingValue = null);
   }
 
   submitRating() {
-    this._voteService.addVote(this.vote);
-
-    this._voteService.getVotes().then(votes => console.log(votes));
+    this._ratingService.addRatingSet(this.ratings);
   }
 
   allRatingsFilled() {
     var ratingsFilled: number = 0;
-    this.vote.ratings.forEach(rating => {
+    this.ratings.forEach(rating => {
       if (rating.ratingValue !== null) {
         ratingsFilled++;
       }
     });
 
-    return ratingsFilled === this.vote.ratings.length;
+    return ratingsFilled === this.ratings.length;
   }
 }
 

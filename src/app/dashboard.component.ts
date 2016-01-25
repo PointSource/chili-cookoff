@@ -2,7 +2,7 @@ import {Component, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {Chili} from './chili/chili';
 import {ChiliService} from './chili/chili.service';
-import {VoteService} from './voting/vote.service';
+import {RatingService} from './voting/rating.service';
 
 @Component({
   selector: 'my-dashboard',
@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private _heroService: ChiliService, 
     private _router: Router,
-    private _voteService: VoteService) { }
+    private _ratingService: RatingService) { }
 
   ngOnInit() {
     this._heroService.getChilis().then(chilis => this.chilis = chilis);
@@ -30,6 +30,6 @@ export class DashboardComponent implements OnInit {
   }
 
   hasVotedOn(chili: Chili) {
-    return this._voteService.hasVote(chili.id);
+    return this._ratingService.hasRatingForChili(chili.id);
   }
 }
