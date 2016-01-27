@@ -1,4 +1,17 @@
-<h1>{{title}}</h1>    
-<a [routerLink]="['Dashboard']">View Chilis</a>
-<a [routerLink]="['Results']">View Results</a>
-<router-outlet></router-outlet>
+<div class="top-bar">
+  	<div class="top-bar-left">
+    	<ul class="menu">
+			<li class="menu-text">{{title}}</li>
+			<li><a [routerLink]="['Dashboard']">Chilis</a></li>
+			<li><a [routerLink]="['Results']">Results</a></li>
+	    	<li>
+				<judge-selector [(selectedJudgeIndex)]="selectedJudgeIndex" [judges]="judges"></judge-selector>
+			</li>
+    	</ul>
+  	</div>
+  
+</div>
+
+<div class="row columns">
+	<router-outlet></router-outlet>
+</div>

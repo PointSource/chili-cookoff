@@ -1,3 +1,4 @@
-<select [(ngModel)]="selectedJudge">
-	<option *ngFor="#judge of judges" [value]="judge">{{judge}}</option>
+<select [(ngModel)]="selectedJudgeIndex">
+	<option [value]="null">All Judges</option>
+	<option *ngFor="#judge of judges; #i = index" [value]="i">{{judge.name}}</option>
 </select>

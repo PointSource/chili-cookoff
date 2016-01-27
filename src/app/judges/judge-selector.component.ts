@@ -1,23 +1,22 @@
 import {Component, OnInit} from 'angular2/core';
 import {Judge} from './judge.ts';
+import {JudgeService} from './judge.service'
 
 @Component({
-	selector: 'judge-selector'
+	selector: 'judge-selector',
+	templateUrl: 'app/judges/judge-selector.component.html',
+	providers: [JudgeService]
 })
 
 export class JudgeSelectorComponent implements OnInit {
 	public judges: Judge[];
+	public selectedJudgeIndex: number;
+
+	constructor(private _judgeService: JudgeService) {}
 
 	ngOnInit() {
-		this.judges = [{
-			name:'Mandy',
-			id:1
-		}, {
-			name: 'JM',
-			id: 2
-		}, {
-			name: 'Patrick',
-			id: 3
-		}]
+		this._judgeService.getJudges().then(judges => this.judges = judges);
+		this.selectedJudgeIndex = 0;
 	}
+
 }
