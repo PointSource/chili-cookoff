@@ -1,4 +1,4 @@
-import { Category } from '../voting/category';
+import { Category } from '../rating/category';
 
 export var CATEGORIES: Category[] = [
   {"id": 1, "name": "Spiciest", "adjective": "Spiciness"},

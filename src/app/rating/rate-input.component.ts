@@ -5,8 +5,8 @@ import {CategoryService} from './category.service';
 
 @Component({
   selector: 'rate-input',
-  templateUrl: 'app/voting/rate-input.component.html',
-  styleUrls: ['app/voting/rate-input.component.css'],
+  templateUrl: 'app/rating/rate-input.component.html',
+  styleUrls: ['app/rating/rate-input.component.css'],
   inputs: ['rating']
 })
 
@@ -19,14 +19,11 @@ export class RateInputComponent implements OnInit {
 
 	ngOnInit() {
 		this._categoryService.getCategory(this.rating.categoryId).then(category => {
-
 			this.category = category
-			console.log(this.category);
-		}
-		);
+		});
 	}
 
-	updateRating(ratingValue) {
+	updateRating(ratingValue:number) : void {
 		this.rating.ratingValue = ratingValue;
 	}
 

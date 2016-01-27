@@ -1,15 +1,15 @@
 import {Component, OnInit} from 'angular2/core';
 import {Router} from 'angular2/router';
-import {Chili} from './chili/chili';
-import {ChiliService} from './chili/chili.service';
-import {RatingService} from './voting/rating.service';
+import {Chili} from './chili';
+import {ChiliService} from './chili.service';
+import {RatingService} from '../rating/rating.service';
 
 @Component({
   selector: 'my-dashboard',
-  templateUrl: 'app/dashboard.component.html',
-  styleUrls: ['app/dashboard.component.css']
+  templateUrl: 'app/chili/chili-list.component.html',
+  styleUrls: ['app/chili/chili-list.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class ChiliListComponent implements OnInit {
   public chilis: Chili[] = [];
 
   constructor(

@@ -1,8 +1,9 @@
 import {Component, OnInit} from 'angular2/core';
-import {RatingService} from '../voting/rating.service';
-import {Rating} from '../voting/rating';
-import {Category} from '../voting/category';
-import {CategoryService} from '../voting/category.service';
+import {RatingService} from '../rating/rating.service';
+import {Rating} from '../rating/rating';
+import {Chili} from '../chili/chili';
+import {Category} from '../rating/category';
+import {CategoryService} from '../rating/category.service';
 import {ChiliService} from '../chili/chili.service';
 
 
@@ -12,8 +13,8 @@ import {ChiliService} from '../chili/chili.service';
 })
 export class ResultsComponent implements OnInit {
 	public categories: Category[];
-	public ratingsByCategory = [];
-	public chilisById = {};
+	public ratingsByCategory:Rating[] = [];
+	public chiliList: Chili[];
 
 	constructor(
 		private _ratingService: RatingService, 
@@ -24,9 +25,15 @@ export class ResultsComponent implements OnInit {
 		this._ratingService.getRatingsForAllCategories().then(ratingsByCategory => {
 			this.ratingsByCategory = ratingsByCategory;
 		});
-		this._chiliService.getChilisById().then(chilisById => {
-			this.chilisById = chilisById;
-		});
+		this._chiliService.getChilis().then(chilis => this.chiliList = chilis);
+	}
 
+	getChiliNameById(chiliId:number):string {
+		var chiliName:string;
+		var filteredChiliList: Chili[] = this.chiliList.filter(chili => chili.id === chiliId);
+		if (filteredChiliList.length > 0) {
+			chiliName = filteredChiliList[0].name;
+		} 
+		return chiliName;
 	}
 }

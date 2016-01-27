@@ -21,14 +21,14 @@ export class RatingService {
 	}
 
 	hasRatingForChili(chiliId: number) : boolean {
-		var hasVote:boolean = false;
+		var hasRating:boolean = false;
 		this.ratings.forEach(rating =>
 		{
 			if (rating.chiliId === chiliId) {
-				hasVote = true;
+				hasRating = true;
 			}
 		});
-		return hasVote;
+		return hasRating;
 	}
 
 	createRatingSetForChili(chiliId: number) {
@@ -60,15 +60,15 @@ export class RatingService {
 	}
 
 	getRatingsForAllCategories() {
-		var votesForCategories = [];
+		var ratingsForCategories:any[] = [];
 		return this._categoryService.getCategories().then(categories => {
 			categories.forEach(category => {
-				votesForCategories.push({
+				ratingsForCategories.push({
 					ratings: this.getRatingsForCategory(category.id),
 					category: category
 				});
 			});
-			return votesForCategories;
+			return ratingsForCategories;
 		});
 	}
 

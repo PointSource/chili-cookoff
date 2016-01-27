@@ -8,11 +8,11 @@ import {RateInputComponent} from './rate-input.component';
 
 @Component({
   selector: 'vote',
-  templateUrl: 'app/voting/vote.component.html',
-  styleUrls: ['app/voting/vote.component.css'],
+  templateUrl: 'app/rating/rating.component.html',
+  styleUrls: ['app/rating/rating.component.css'],
   directives: [RateInputComponent]
 })
-export class VoteComponent implements OnInit {
+export class RatingComponent implements OnInit {
   public chili: Chili;
   public ratings: Rating[];
 
@@ -28,17 +28,16 @@ export class VoteComponent implements OnInit {
       this._chiliService.getChili(id).then(chili => {
         this.chili = chili
         this._ratingService.getRatingSetForChili(this.chili.id).then(ratings => {
-          
+
           this.ratings = ratings
           console.log(this.ratings);
-        }
-        );
+        });
       });
     }
 
   }
 
-  resetVote() {
+  resetRating() {
     this.ratings.forEach(rating => rating.ratingValue = null);
   }
 
