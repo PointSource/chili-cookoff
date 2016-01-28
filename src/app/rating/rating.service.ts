@@ -16,20 +16,16 @@ export class RatingService {
 	}
 
 	addRatingSet(ratings: Rating[]) {
-		if (!this.hasRatingForChili(ratings[0].chiliId)) {
+		if (!this.hasRatingForChili(ratings[0].chiliId, ratings[0].judge)) {
 			this.ratings = this.ratings.concat(ratings);
 		}
 	}
 
-	hasRatingForChili(chiliId: number) : boolean {
-		var hasRating:boolean = false;
-		this.ratings.forEach(rating =>
-		{
-			if (rating.chiliId === chiliId) {
-				hasRating = true;
-			}
-		});
-		return hasRating;
+	hasRatingForChili(chiliId: number, judge: Judge) : boolean {
+		var filteredRatings = this.ratings.filter(h =>
+			h.chiliId === chiliId && h.judge.id === judge.id
+		);
+		return filteredRatings.length > 0;
 	}
 
 	createRatingSetForChili(chiliId: number, judge: Judge) {

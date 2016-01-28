@@ -3,6 +3,7 @@ import {Router} from 'angular2/router';
 import {Chili} from './chili';
 import {ChiliService} from './chili.service';
 import {RatingService} from '../rating/rating.service';
+import {JudgeService} from '../judges/judge.service';
 
 @Component({
   selector: 'my-dashboard',
@@ -15,7 +16,8 @@ export class ChiliListComponent implements OnInit {
   constructor(
     private _heroService: ChiliService, 
     private _router: Router,
-    private _ratingService: RatingService) { }
+    private _ratingService: RatingService,
+    private _judgeServcie: JudgeService) { }
 
   ngOnInit() {
     this._heroService.getChilis().then(chilis => this.chilis = chilis);
@@ -30,6 +32,7 @@ export class ChiliListComponent implements OnInit {
   }
 
   hasVotedOn(chili: Chili) {
-    return this._ratingService.hasRatingForChili(chili.id);
+    var judge = this._judgeServcie.getSelectedJudge();
+    return this._ratingService.hasRatingForChili(chili.id, judge);
   }
 }
