@@ -1,6 +1,8 @@
 import {Injectable} from 'angular2/core';
 import {Rating} from './rating';
 import {Judge} from '../judges/judge';
+import {Chili} from '../chili/chili';
+import {Category} from './category';
 import {CategoryService} from './category.service';
 
 @Injectable()
@@ -16,19 +18,19 @@ export class RatingService {
 	}
 
 	addRatingSet(ratings: Rating[]) {
-		if (!this.hasRatingForChili(ratings[0].chiliId, ratings[0].judge)) {
+		if (!this.hasRatingForChili(ratings[0].chili.id, ratings[0].judge)) {
 			this.ratings = this.ratings.concat(ratings);
 		}
 	}
 
 	hasRatingForChili(chiliId: number, judge: Judge) : boolean {
 		var filteredRatings = this.ratings.filter(h =>
-			h.chiliId === chiliId && h.judge.id === judge.id
+			h.chili.id === chiliId && h.judge.id === judge.id
 		);
 		return filteredRatings.length > 0;
 	}
 
-	createRatingSetForChili(chiliId: number, judge: Judge) {
+	createRatingSetForChili(chili: Chili, judge: Judge) {
 		var ratings: Rating[] = [];
 
 		return this._categoryService.getCategories().then(categories => {
@@ -36,8 +38,8 @@ export class RatingService {
 			categories.forEach(category => {
 				ratings.push({
 					ratingValue: null,
-					categoryId: category.id,
-					chiliId: chiliId,
+					category: category,
+					chili: chili,
 					judge: judge
 				});
 			});
@@ -46,13 +48,13 @@ export class RatingService {
 		});
 	}
 
-	getRatingSetForChili(chiliId: number, judge: Judge) {
+	getRatingSetForChili(chili: Chili, judge: Judge) {
 		var ratings:Rating[] = this.ratings.filter(h => 
-			h.chiliId === chiliId && h.judge.id === judge.id
+			h.chili.id === chili.id && h.judge.id === judge.id
 		);
 
 		if (ratings.length === 0) {
-			return this.createRatingSetForChili(chiliId, judge);
+			return this.createRatingSetForChili(chili, judge);
 		}
 		else return Promise.resolve(ratings);
 	}
@@ -62,17 +64,25 @@ export class RatingService {
 		return this._categoryService.getCategories().then(categories => {
 			categories.forEach(category => {
 				ratingsForCategories.push({
-					ratings: this.getRatingsForCategory(category.id),
-					category: category
+					ratings: this.getRatingsForCategory(category),
+					categoryName: category.name
 				});
 			});
 			return ratingsForCategories;
 		});
 	}
 
-	getRatingsForCategory(categoryId: number) {
+	getTopChiliForCategory(category: Category) {
 		var ratings: Rating[] = this.ratings.filter(h =>
-			h.categoryId === categoryId
+			h.category.id === category.id
+		);
+
+
+	}
+
+	getRatingsForCategory(category: Category) {
+		var ratings: Rating[] = this.ratings.filter(h =>
+			h.category.id === category.id
 		);
 
 		ratings.sort((a, b) => {

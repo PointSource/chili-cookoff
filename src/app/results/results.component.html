@@ -1,13 +1,13 @@
 <div class="row columns">
 	<h3>Voting Results</h3>
 	<div *ngFor="#categoryAndRating of ratingsByCategory">
-		<h4>{{categoryAndRating.category.name}}</h4>
+		<h4>{{categoryAndRating.categoryName}}</h4>
 		<div *ngIf="categoryAndRating.ratings.length > 0">
 			<div *ngFor="#rating of categoryAndRating.ratings" class="row">
 				<div class="columns small-6 chili-pot">
 					<img src="../resources/crock-pot-transp.png">
 					<div class="chili-label">
-						{{getChiliNameById(rating.chiliId)}}
+						{{rating.chili.name}}
 					</div>
 				</div>
 				<div class="columns small-6 stat">

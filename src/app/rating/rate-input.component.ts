@@ -18,7 +18,7 @@ export class RateInputComponent implements OnInit {
 	constructor(private _categoryService: CategoryService) {}
 
 	ngOnInit() {
-		this._categoryService.getCategory(this.rating.categoryId).then(category => {
+		this._categoryService.getCategory(this.rating.category.id).then(category => {
 			this.category = category
 		});
 	}

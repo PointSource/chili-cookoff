@@ -30,7 +30,7 @@ export class RatingComponent implements OnInit {
       this._chiliService.getChili(id).then(chili => {
         this.chili = chili
         var selectedJudge = this._judgeService.getSelectedJudge();
-        this._ratingService.getRatingSetForChili(this.chili.id, selectedJudge).then(ratings => {
+        this._ratingService.getRatingSetForChili(this.chili, selectedJudge).then(ratings => {
           this.ratings = ratings
         });
       });
