@@ -4,19 +4,24 @@ import {JudgeService} from './judge.service'
 
 @Component({
 	selector: 'judge-selector',
-	templateUrl: 'app/judges/judge-selector.component.html',
-	providers: [JudgeService]
+	templateUrl: 'app/judges/judge-selector.component.html'
 })
 
 export class JudgeSelectorComponent implements OnInit {
 	public judges: Judge[];
-	public selectedJudgeIndex: number;
+	public selectedJudgeId: number;
 
 	constructor(private _judgeService: JudgeService) {}
 
 	ngOnInit() {
 		this._judgeService.getJudges().then(judges => this.judges = judges);
-		this.selectedJudgeIndex = 0;
+		this.selectedJudgeId = 1;
+	}
+
+	selectJudge(event:any) {
+		this._judgeService.selectJudge(parseInt(event.target.value, 10));
+
+		console.log(this._judgeService.getSelectedJudge());
 	}
 
 }

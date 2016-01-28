@@ -1,8 +1,9 @@
-import {Component, OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
+import {Component, OnInit, Input} from 'angular2/core';
+import {RouteParams, RouteData} from 'angular2/router';
 import {Chili} from '../chili/chili';
 import {Rating} from './rating';
 import {ChiliService} from '../chili/chili.service';
+import {JudgeService} from '../judges/judge.service';
 import {RatingService} from './rating.service';
 import {RateInputComponent} from './rate-input.component';
 
@@ -10,7 +11,7 @@ import {RateInputComponent} from './rate-input.component';
   selector: 'vote',
   templateUrl: 'app/rating/rating.component.html',
   styleUrls: ['app/rating/rating.component.css'],
-  directives: [RateInputComponent]
+  directives: [RateInputComponent],
 })
 export class RatingComponent implements OnInit {
   public chili: Chili;
@@ -19,7 +20,8 @@ export class RatingComponent implements OnInit {
   constructor(
     private _chiliService: ChiliService,
     private _ratingService: RatingService,
-    private _routeParams: RouteParams) {
+    private _judgeService: JudgeService,
+    private _routeParams: RouteParams, private _routeData: RouteData) {
   }
 
   ngOnInit() {
@@ -27,8 +29,8 @@ export class RatingComponent implements OnInit {
       let id = +this._routeParams.get('id');
       this._chiliService.getChili(id).then(chili => {
         this.chili = chili
-        this._ratingService.getRatingSetForChili(this.chili.id).then(ratings => {
-
+        var selectedJudge = this._judgeService.getSelectedJudge();
+        this._ratingService.getRatingSetForChili(this.chili.id, selectedJudge).then(ratings => {
           this.ratings = ratings
         });
       });
@@ -36,6 +38,7 @@ export class RatingComponent implements OnInit {
   }
 
   resetRating() {
+    console.log(this._judgeService.getSelectedJudge());
     this.ratings.forEach(rating => rating.ratingValue = null);
   }
 

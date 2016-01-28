@@ -13,6 +13,7 @@
 				<div class="columns small-6 stat">
 					<div class="callout" [ngClass]="{success: rating.ratingValue === 5, primary: rating.ratingValue === 4, secondary: rating.ratingValue < 4}">
 						{{rating.ratingValue}}
+						{{rating.judge.name}}
 					</div>
 				</div>
 			</div>

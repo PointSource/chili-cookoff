@@ -1,5 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {Rating} from './rating';
+import {Judge} from '../judges/judge';
 import {CategoryService} from './category.service';
 
 @Injectable()
@@ -31,7 +32,7 @@ export class RatingService {
 		return hasRating;
 	}
 
-	createRatingSetForChili(chiliId: number) {
+	createRatingSetForChili(chiliId: number, judge: Judge) {
 		var ratings: Rating[] = [];
 
 		return this._categoryService.getCategories().then(categories => {
@@ -40,7 +41,8 @@ export class RatingService {
 				ratings.push({
 					ratingValue: null,
 					categoryId: category.id,
-					chiliId: chiliId
+					chiliId: chiliId,
+					judge: judge
 				});
 			});
 
@@ -48,13 +50,13 @@ export class RatingService {
 		});
 	}
 
-	getRatingSetForChili(chiliId: number) {
+	getRatingSetForChili(chiliId: number, judge: Judge) {
 		var ratings:Rating[] = this.ratings.filter(h => 
-			h.chiliId === chiliId
+			h.chiliId === chiliId && h.judge.id === judge.id
 		);
 
 		if (ratings.length === 0) {
-			return this.createRatingSetForChili(chiliId);
+			return this.createRatingSetForChili(chiliId, judge);
 		}
 		else return Promise.resolve(ratings);
 	}
