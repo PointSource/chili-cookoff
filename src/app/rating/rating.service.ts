@@ -67,6 +67,7 @@ export class RatingService {
 					ratings: this.getRatingsForCategory(category),
 					categoryName: category.name
 				});
+				this.getTopChiliForCategory(category);
 			});
 			return ratingsForCategories;
 		});
@@ -77,7 +78,15 @@ export class RatingService {
 			h.category.id === category.id
 		);
 
+		var ratingsPerChili:any = {};
+		ratings.forEach(rating => {
+			if (ratingsPerChili[rating.chili.id] === undefined) {
+				ratingsPerChili[rating.chili.id] = 0;
+			}
+			ratingsPerChili[rating.chili.id] += rating.ratingValue;
+		});
 
+		console.log(ratingsPerChili);
 	}
 
 	getRatingsForCategory(category: Category) {

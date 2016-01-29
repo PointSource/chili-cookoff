@@ -20,8 +20,6 @@ export class JudgeSelectorComponent implements OnInit {
 
 	selectJudge(event:any) {
 		this._judgeService.selectJudge(parseInt(event.target.value, 10));
-
-		console.log(this._judgeService.getSelectedJudge());
 	}
 
 }

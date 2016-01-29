@@ -38,7 +38,6 @@ export class RatingComponent implements OnInit {
   }
 
   resetRating() {
-    console.log(this._judgeService.getSelectedJudge());
     this.ratings.forEach(rating => rating.ratingValue = null);
   }
 

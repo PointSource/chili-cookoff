@@ -16,6 +16,7 @@ export class ResultsComponent implements OnInit {
 		this._ratingService.getRatingsForAllCategories().then(ratingsByCategory => {
 			this.ratingsByCategory = ratingsByCategory;
 		});
+
 	}
 
 }

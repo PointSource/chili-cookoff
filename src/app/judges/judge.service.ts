@@ -22,9 +22,6 @@ export class JudgeService {
 	}
 
 	selectJudge(id: number) {
-		console.log('selectJudge', this.selectedJudge);
-		console.log('judges', this.judges);
-
 		var filteredJudges = this.judges.filter(judge => judge.id === id);
 		if (filteredJudges.length > 0) {
 			this.selectedJudge = filteredJudges[0];
@@ -37,8 +34,6 @@ export class JudgeService {
 	}
 
 	getSelectedJudge(): Judge {
-		console.log('selectJudge', this.selectedJudge);
-		console.log('judges', this.judges);
 		return this.selectedJudge;
 	}
 }
