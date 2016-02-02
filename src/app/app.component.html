@@ -2,16 +2,15 @@
   	<div class="top-bar-left">
     	<ul class="menu">
 			<li class="menu-text">{{title}}</li>
-			<li><a [routerLink]="['Dashboard']">Chilis</a></li>
-			<li><a [routerLink]="['Results']">Results</a></li>
-	    	<li>
-				<judge-selector></judge-selector>
-			</li>
+			<li><a>Home</a></li>
+			<li><a>Chilis</a></li>
+			<li><a>Results</a></li>
     	</ul>
   	</div>
   
 </div>
 
 <div class="row columns">
-	<router-outlet></router-outlet>
+	Route stuff will go here. Current judge is [UNKNOWN]
+	<judge-selector></judge-selector>
 </div>
