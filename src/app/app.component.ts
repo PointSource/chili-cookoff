@@ -44,6 +44,7 @@ export class AppComponent implements OnInit {
 	ngOnInit() {
 		this._judgeService.getJudges().then(judges => {
 			this._appStore.dispatch(this._judgeActions.setJudgeList(judges));
+			this._appStore.dispatch(this._judgeActions.setCurrentJudge(judges[0].id))
 		});
 
 
