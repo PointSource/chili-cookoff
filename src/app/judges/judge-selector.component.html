@@ -1,4 +1,3 @@
-<select [(ngModel)]="currentJudge" (change)="selectJudge($event)">
-	<option [value]="null">All Judges</option>
+<select [(ngModel)]="currentJudgeId" (change)="selectJudge($event)">
 	<option *ngFor="#judge of judges; #i = index" [value]="judge.id">{{judge.name}}</option>
 </select>

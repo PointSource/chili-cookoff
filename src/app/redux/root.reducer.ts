@@ -1,29 +1,41 @@
 import * as ChiliActions from './chili.actions';
-import {Rating} from '../rating/rating'
+import {Rating} from '../rating/rating';
+import {Judge} from '../judges/judge';
+
+var initialJudges: Judge[] = [
+	{ "id": 1, "name": "Mandy" },
+	{ "id": 2, "name": "Erik" },
+	{ "id": 3, "name": "Jen" },
+	{ "id": 4, "name": "CJ" },
+	{ "id": 5, "name": "Kevin M" },
+];
 
 const initialState = {
 	ratings: [],
-	judges: [
-		{ "id": 1, "name": "Mandy" },
-		{ "id": 2, "name": "Erik" },
-		{ "id": 3, "name": "Jen" },
-		{ "id": 4, "name": "CJ" },
-		{ "id": 5, "name": "Kevin M" },
-	],
-	currentJudge: 1
+	judges: initialJudges,
+	currentJudge: initialJudges[1]
 }
 
 export function rootReducer(state = initialState, action) {
 	switch (action.type) {
 		case ChiliActions.SET_CURRENT_JUDGE:
-			console.log('set current judge action');
-			console.log(state);
-			console.log(action.judgeId);
-			// state.currentJudge = action.judgeId;
+
+			var currentJudge: Judge;
+
+			var filteredJudges = state.judges.filter(judge => judge.id === action.judgeId);
+			console.log('judgeID',action.judgeId);
+			console.log('judges list',state.judges);
+			console.log('filteredJudges',filteredJudges);
+			if (filteredJudges.length > 0) {
+				currentJudge = filteredJudges[0];
+			}
+			else {
+				currentJudge = null;
+			}
 			return {
 				ratings: state.ratings.map(rating => rating),
 				judges: state.judges.map(judge => judge),
-				currentJudge: action.judgeId
+				currentJudge: currentJudge
 			};
 			break; 
 		default: 

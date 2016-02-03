@@ -10,7 +10,7 @@ import {ChiliActions} from '../redux/chili.actions'
 export class JudgeSelectorComponent implements OnInit {
 	public judges: Judge[];
 	private unsubscribe;
-	private currentJudge;
+	private currentJudgeId;
 
 	constructor(
 		@Inject('AppStore') private _appStore: AppStore,
@@ -27,10 +27,10 @@ export class JudgeSelectorComponent implements OnInit {
 	}
 
 	private selectJudge(event:any) {
-		this._appStore.dispatch(this._chiliActions.setCurrentJudge(event.target.value))
+		this._appStore.dispatch(this._chiliActions.setCurrentJudge(parseInt(event.target.value, 10)));
 	}
 
 	private updateJudge() {
-		this.currentJudge = this._appStore.getState().currentJudge;
+		this.currentJudgeId = this._appStore.getState().currentJudge.id;
 	}
 }
