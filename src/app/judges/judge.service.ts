@@ -5,7 +5,7 @@ import {Judge} from './judge';
 
 @Injectable()
 export class JudgeService {
-	public judges: Judge[] = [];
+	private judges: Judge[] = [];
 
 	getJudges() {
 		this.judges = JUDGES;

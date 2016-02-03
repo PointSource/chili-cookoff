@@ -1,6 +1,6 @@
 import {Component, OnInit, Inject} from 'angular2/core';
 import {Judge} from './judge';
-import {ChiliActions} from '../redux/chili.actions'
+import {JudgeActions} from './judge.actions'
 
 @Component({
 	selector: 'judge-selector',
@@ -14,8 +14,8 @@ export class JudgeSelectorComponent implements OnInit {
 
 	constructor(
 		@Inject('AppStore') private _appStore: AppStore,
-		private _chiliActions: ChiliActions) {
-
+		private _judgeActions: JudgeActions
+	) {
 		this.unsubscribe = this._appStore
 			.subscribe(() => this.updateJudge());
 	}
@@ -27,7 +27,7 @@ export class JudgeSelectorComponent implements OnInit {
 	}
 
 	private selectJudge(event:any) {
-		this._appStore.dispatch(this._chiliActions.setCurrentJudge(parseInt(event.target.value, 10)));
+		this._appStore.dispatch(this._judgeActions.setCurrentJudge(parseInt(event.target.value, 10)));
 	}
 
 	private updateJudge() {
