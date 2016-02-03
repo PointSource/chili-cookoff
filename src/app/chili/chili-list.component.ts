@@ -23,10 +23,6 @@ export class ChiliListComponent implements OnInit {
     this._heroService.getChilis().then(chilis => this.chilis = chilis);
   }
 
-  gotoDetail(chili: Chili) {
-    this._router.navigate(['ChiliDetail', { id: chili.id }]);
-  }
-
   gotoVote(chili: Chili) {
     this._router.navigate(['ChiliVote', { id: chili.id }]);
   }
