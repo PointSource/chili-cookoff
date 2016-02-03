@@ -13,15 +13,20 @@ import {JudgeSelectorComponent} from './judges/judge-selector.component'
 export class AppComponent {
 	public title = 'Cookoff!!';
 	public currentJudge: number;
+	private unsubscribe;
 
 	constructor(
-		@Inject('AppStore') private appStore: AppStore) {
-
+		@Inject('AppStore') private appStore: AppStore
+	) {
 		this.unsubscribe = this.appStore.subscribe(() => {
 			let state = this.appStore.getState();
 			this.currentJudge = state.currentJudge;
 		});
 	}
 
+	private ngOnDestroy() {
+		//remove listener
+		this.unsubscribe();
+	}
 
 }

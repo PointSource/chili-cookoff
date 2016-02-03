@@ -11,20 +11,29 @@ import {ChiliActions} from '../redux/chili.actions'
 
 export class JudgeSelectorComponent implements OnInit {
 	public judges: Judge[];
-	public selectedJudgeId: number;
+	private unsubscribe;
+	private currentJudge;
 
 	constructor(
 		private _judgeService: JudgeService,
 		@Inject('AppStore') private appStore: AppStore,
-		private _chiliActions: ChiliActions) { }
+		private _chiliActions: ChiliActions) {
+
+
+		this.unsubscribe = this.appStore
+			.subscribe(() => this.updateActive());
+	}
 
 	ngOnInit() {
 		this._judgeService.getJudges().then(judges => this.judges = judges);
-		this.selectedJudgeId = 1;
+		this.updateActive();
 	}
 
 	private selectJudge(event:any) {
 		this.appStore.dispatch(this._chiliActions.setCurrentJudge(event.target.value))
 	}
 
+	private updateActive() {
+		this.currentJudge = this.appStore.getState().currentJudge;
+	}
 }

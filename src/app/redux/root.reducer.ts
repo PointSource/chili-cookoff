@@ -10,7 +10,7 @@ const initialState = {
 		{ "id": 4, "name": "CJ" },
 		{ "id": 5, "name": "Kevin M" },
 	],
-	currentJudge: null
+	currentJudge: 1
 }
 
 export function rootReducer(state = initialState, action) {
