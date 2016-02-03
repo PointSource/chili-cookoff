@@ -1,9 +1,8 @@
-import {Component, OnInit, Input} from 'angular2/core';
+import {Component, OnInit, Inject} from 'angular2/core';
 import {RouteParams, RouteData} from 'angular2/router';
 import {Chili} from '../chili/chili';
 import {Rating} from './rating';
 import {ChiliService} from '../chili/chili.service';
-import {JudgeService} from '../judges/judge.service';
 import {RatingService} from './rating.service';
 import {RateInputComponent} from './rate-input.component';
 
@@ -18,9 +17,9 @@ export class RatingComponent implements OnInit {
   public ratings: Rating[];
 
   constructor(
+    @Inject('AppStore') private _appStore: AppStore,
     private _chiliService: ChiliService,
     private _ratingService: RatingService,
-    private _judgeService: JudgeService,
     private _routeParams: RouteParams, private _routeData: RouteData) {
   }
 
@@ -29,8 +28,8 @@ export class RatingComponent implements OnInit {
       let id = +this._routeParams.get('id');
       this._chiliService.getChili(id).then(chili => {
         this.chili = chili
-        var selectedJudge = this._judgeService.getSelectedJudge();
-        this._ratingService.getRatingSetForChili(this.chili, selectedJudge).then(ratings => {
+        var currentJudge = this._appStore.getState().currentJudge;
+        this._ratingService.getRatingSetForChili(this.chili, currentJudge).then(ratings => {
           this.ratings = ratings
         });
       });

@@ -1,12 +1,10 @@
 import {Component, OnInit, Inject} from 'angular2/core';
 import {Judge} from './judge';
-import {JudgeService} from './judge.service';
 import {ChiliActions} from '../redux/chili.actions'
 
 @Component({
 	selector: 'judge-selector',
-	templateUrl: 'app/judges/judge-selector.component.html',
-	providers: [JudgeService]
+	templateUrl: 'app/judges/judge-selector.component.html'
 })
 
 export class JudgeSelectorComponent implements OnInit {
@@ -15,25 +13,24 @@ export class JudgeSelectorComponent implements OnInit {
 	private currentJudge;
 
 	constructor(
-		private _judgeService: JudgeService,
-		@Inject('AppStore') private appStore: AppStore,
+		@Inject('AppStore') private _appStore: AppStore,
 		private _chiliActions: ChiliActions) {
 
-
-		this.unsubscribe = this.appStore
-			.subscribe(() => this.updateActive());
+		this.unsubscribe = this._appStore
+			.subscribe(() => this.updateJudge());
 	}
 
 	ngOnInit() {
-		this._judgeService.getJudges().then(judges => this.judges = judges);
-		this.updateActive();
+		this.judges = this._appStore.getState().judges;
+
+		this.updateJudge();
 	}
 
 	private selectJudge(event:any) {
-		this.appStore.dispatch(this._chiliActions.setCurrentJudge(event.target.value))
+		this._appStore.dispatch(this._chiliActions.setCurrentJudge(event.target.value))
 	}
 
-	private updateActive() {
-		this.currentJudge = this.appStore.getState().currentJudge;
+	private updateJudge() {
+		this.currentJudge = this._appStore.getState().currentJudge;
 	}
 }

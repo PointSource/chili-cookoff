@@ -6,10 +6,6 @@ import {Judge} from './judge';
 @Injectable()
 export class JudgeService {
 	public judges: Judge[] = [];
-	public selectedJudge: Judge = JUDGES[0];
-	public selectedJudgeObject: any = {
-		judge: null
-	};
 
 	getJudges() {
 		this.judges = JUDGES;
@@ -21,19 +17,4 @@ export class JudgeService {
 			.then(judges => judges.filter(h => h.id === id)[0]);
 	}
 
-	selectJudge(id: number) {
-		var filteredJudges = this.judges.filter(judge => judge.id === id);
-		if (filteredJudges.length > 0) {
-			this.selectedJudge = filteredJudges[0];
-		}
-		else {
-			this.selectedJudge = null;
-		}
-
-		this.selectedJudgeObject.judge = this.selectedJudge;
-	}
-
-	getSelectedJudge(): Judge {
-		return this.selectedJudge;
-	}
 }

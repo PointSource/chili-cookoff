@@ -1,32 +1,30 @@
 import {Component, Inject} from 'angular2/core';
-import {JudgeSelectorComponent} from './judges/judge-selector.component'
+import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {JudgeComponent} from './judges/judge.component'
+import {ChiliListComponent} from './chili/chili-list.component';
+// import {RatingComponent} from './rating/rating.component'
+import {CategoryService} from './rating/category.service';
+import {ChiliService} from './chili/chili.service';
+import {RatingService} from './rating/rating.service';
 
 @Component({
 	selector: 'my-app',
 	templateUrl: 'app/app.component.html',
 	styleUrls: ['app/app.component.css'],
   	directives: [
-  		JudgeSelectorComponent
-	]
+		ROUTER_DIRECTIVES
+	],
+	providers: [CategoryService, ChiliService, RatingService]
 })
+@RouteConfig([
+	{ path: '/judges', name: 'Judges', component: JudgeComponent, useAsDefault: true },
+  	{ path: '/chilis', name: 'Chilis', component: ChiliListComponent },
+	
+	// { path: '/chili/:id', name: 'ChiliVote', component: RatingComponent }
+	// { path: '/results', name: 'Results', component: ResultsComponent },
+	// { path: '/chili/:id', name: 'ChiliDetail', component: ChiliDetailComponent },
+])
 
 export class AppComponent {
 	public title = 'Cookoff!!';
-	public currentJudge: number;
-	private unsubscribe;
-
-	constructor(
-		@Inject('AppStore') private appStore: AppStore
-	) {
-		this.unsubscribe = this.appStore.subscribe(() => {
-			let state = this.appStore.getState();
-			this.currentJudge = state.currentJudge;
-		});
-	}
-
-	private ngOnDestroy() {
-		//remove listener
-		this.unsubscribe();
-	}
-
 }

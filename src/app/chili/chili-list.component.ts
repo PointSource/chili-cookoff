@@ -1,9 +1,8 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit, Inject} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {Chili} from './chili';
 import {ChiliService} from './chili.service';
 import {RatingService} from '../rating/rating.service';
-import {JudgeService} from '../judges/judge.service';
 
 @Component({
   selector: 'my-dashboard',
@@ -14,10 +13,11 @@ export class ChiliListComponent implements OnInit {
   public chilis: Chili[] = [];
 
   constructor(
+    @Inject('AppStore') private _appStore: AppStore,
     private _heroService: ChiliService, 
     private _router: Router,
-    private _ratingService: RatingService,
-    private _judgeServcie: JudgeService) { }
+    private _ratingService: RatingService
+  ) { }
 
   ngOnInit() {
     this._heroService.getChilis().then(chilis => this.chilis = chilis);
@@ -32,7 +32,7 @@ export class ChiliListComponent implements OnInit {
   }
 
   hasVotedOn(chili: Chili) {
-    var judge = this._judgeServcie.getSelectedJudge();
+    var judge = this._appStore.getState().currentJudge;
     return this._ratingService.hasRatingForChili(chili.id, judge);
   }
 }

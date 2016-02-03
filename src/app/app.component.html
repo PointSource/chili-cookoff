@@ -2,15 +2,17 @@
   	<div class="top-bar-left">
     	<ul class="menu">
 			<li class="menu-text">{{title}}</li>
-			<li><a>Home</a></li>
-			<li><a>Chilis</a></li>
+			<li><a [routerLink]="['Judges']">Home</a></li>
+			<li><a [routerLink]="['Chilis']">Chilis</a></li>
 			<li><a>Results</a></li>
+			<li class="menu-text">{{currentJudge}}</li>
     	</ul>
   	</div>
   
 </div>
 
 <div class="row columns">
-	Route stuff will go here. Current judge is [{{currentJudge}}]
-	<judge-selector></judge-selector>
+	
+	<router-outlet></router-outlet>
+
 </div>
