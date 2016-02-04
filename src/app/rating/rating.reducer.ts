@@ -7,18 +7,39 @@ const initialState = {
 	ratingList: initialRatingList,
 	chilisRatedByJudge: {},
 	ratingsByCategory: {},
-	chiliCategoryTotals: []
+	totalRatingByChiliAndCategory: []
 }
 
-function chiliCategoryTotals(state = initialState.chiliCategoryTotals, action) {
+
+
+function totalRatingByChiliAndCategory(state = initialState.totalRatingByChiliAndCategory, action) {
 	switch (action.type) {
 		case ADD_RATING:
+			var newTotalRating = state.slice(0, state.length);
+			action.rating.ratingEntries.forEach(ratingValue => {
+				var foundIndex = state.findIndex(x =>
+					x.chiliId === action.rating.chili.id && x.categoryId === ratingValue.category.id);
+				if (foundIndex !== -1) {
+					newTotalRating[foundIndex] = {
+						categoryId: ratingValue.category.id,
+						chiliId: action.rating.chili.id,
+						totalRating: state[foundIndex].totalRating + ratingValue.ratingValue
+					};
+				} else {
+					newTotalRating.push({
+						categoryId: ratingValue.category.id,
+						chiliId: action.rating.chili.id,
+						totalRating: ratingValue.ratingValue
+					});
+				}
+			});
 
-
+			return newTotalRating;
 		default:
 			return state;
 	}
 }
+
 
 function ratingsByCategory(state = initialState.ratingsByCategory, action) {
 	switch (action.type) {
@@ -82,8 +103,8 @@ export function rating(state = initialState, action) {
 					action.rating
 				],
 				chilisRatedByJudge: chilisRatedByJudge(state.chilisRatedByJudge, action),
-				ratingsByCategory: ratingsByCategory(state.ratingsByCategory, action)
-				chiliCategoryTotals: chiliCategoryTotals(state.chiliCategoryTotals, action)
+				ratingsByCategory: ratingsByCategory(state.ratingsByCategory, action),
+				totalRatingByChiliAndCategory: totalRatingByChiliAndCategory(state.totalRatingByChiliAndCategory, action)
 			});
 		default: 
 			// mandatory for sanity (Eg: initialisation)
