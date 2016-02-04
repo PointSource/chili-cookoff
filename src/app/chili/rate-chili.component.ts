@@ -1,15 +1,15 @@
 import {Component, OnInit, Inject} from 'angular2/core';
 import {RouteParams, RouteData} from 'angular2/router';
 import {Chili} from '../chili/chili';
-import {Rating} from './rating';
+import {Rating} from '../rating/rating';
 import {ChiliService} from '../chili/chili.service';
-import {RatingService} from './rating.service';
-import {RateInputComponent} from './rate-input.component';
+import {RatingService} from '../rating/rating.service';
+import {RateInputComponent} from '../rating/rate-input.component';
 
 @Component({
   selector: 'vote',
-  templateUrl: 'app/rating/rating.component.html',
-  styleUrls: ['app/rating/rating.component.css'],
+  templateUrl: 'app/chili/rate-chili.component.html',
+  styleUrls: ['app/chili/rate-chili.component.css'],
   directives: [RateInputComponent],
 })
 export class RatingComponent implements OnInit {
