@@ -1,12 +1,11 @@
 import {Component, Inject, OnInit} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
-import {JudgeComponent} from './judges/judge.component'
 import {ChiliModuleComponent} from './chili/chili-module.component';
 
+import {JudgeComponent} from './judges/judge.component'
 import {JudgeService} from './judges/judge.service';
 import {JudgeActions} from './judges/judge.actions'
-// import {RatingComponent} from './rating/rating.component';
 
 @Component({
 	selector: 'my-app',
@@ -37,7 +36,7 @@ export class AppComponent implements OnInit {
 
 	ngOnInit() {
 		// If there are no judges yet, get them!
-		if (this._appStore.getState().judges.length === 0) {
+		if (this._appStore.getState().judges.judgeList.length === 0) {
 			// Get all the judges, then update the list of judges and select the first one
 			this._judgeService.getJudges().then(judges => {
 				this._appStore.dispatch(this._judgeActions.setJudgeList(judges));

@@ -85,8 +85,6 @@ export class RatingService {
 			}
 			ratingsPerChili[rating.chili.id] += rating.ratingValue;
 		});
-
-		console.log(ratingsPerChili);
 	}
 
 	getRatingsForCategory(category: Category) {

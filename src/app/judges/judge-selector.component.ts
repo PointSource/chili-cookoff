@@ -17,7 +17,7 @@ export class JudgeSelectorComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this.judges = this._appStore.getState().judges;
+		this.judges = this._appStore.getState().judges.judgeList;
 
 		this.updateJudge();
 	}
@@ -28,7 +28,7 @@ export class JudgeSelectorComponent implements OnInit {
 
 	private updateJudge() {
 		let state = this._appStore.getState();
-		let selectedJudge:Judge = state.judges.find(judge => judge.isSelected === true);
+		let selectedJudge:Judge = state.judges.currentJudge;
 
 		if (selectedJudge !== undefined) {
 			this.currentJudgeId = selectedJudge.id;

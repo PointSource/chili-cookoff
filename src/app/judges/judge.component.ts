@@ -29,6 +29,6 @@ export class JudgeComponent implements OnInit {
 
 	private updateJudge() {
 		let state = this._appStore.getState();
-		this.currentJudge = state.judges.find(judge => judge.isSelected === true);
+		this.currentJudge = state.judges.currentJudge;
 	}
 }

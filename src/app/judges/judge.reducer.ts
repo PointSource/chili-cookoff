@@ -1,29 +1,30 @@
 import * as JudgeActions from './judge.actions';
 import {Judge} from './judge';
 
+var initialJudgeList: Judge[] = [];
 
-export function judges(state:Judge[] = [], action) {
+const initialState = {
+	judgeList: initialJudgeList,
+	currentJudge: null
+}
+
+export function judges(state = initialState, action) {
 	switch (action.type) {
 		case JudgeActions.SET_JUDGE_LIST:
-			return action.judges;
-		case JudgeActions.SET_CURRENT_JUDGE:
-			// Copy state array and set all judges.isSelected to false
-			var newState: Judge[] = state.map(judge => {
-				return Object.assign({}, judge, {
-					isSelected: false
-				});
+			return Object.assign({}, state, {
+				judgeList: action.judges
 			});
+		case JudgeActions.SET_CURRENT_JUDGE:
+			var currentJudge: Judge;
 
-			// Get index of judge with matching ID
-			var currentJudgeIndex = newState.findIndex(judge => judge.id === action.judgeId);
-			if (currentJudgeIndex === -1) {
+			currentJudge = state.judgeList.find(judge => judge.id === action.judgeId);
+			if (currentJudge === undefined) {
 				return state;
 			}
 
-			// Set matching judge.isSelected to true
-			newState[currentJudgeIndex].isSelected = true;
-
-			return newState;
+			return Object.assign({}, state, {
+				currentJudge: currentJudge
+			});
 		default: 
 			// mandatory for sanity (Eg: initialisation)
 			return state;
