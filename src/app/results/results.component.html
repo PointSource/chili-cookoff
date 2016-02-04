@@ -1,20 +1,18 @@
 <div class="row columns">
-	<h3>Voting Results</h3>
-	<div *ngFor="#categoryAndRating of ratingsByCategory">
-		<h4>{{categoryAndRating.categoryName}}</h4>
-		<div *ngIf="categoryAndRating.ratings.length > 0">
-			<div *ngFor="#rating of categoryAndRating.ratings" class="row">
-				<div class="columns small-6 chili-pot">
-					<img src="../resources/crock-pot-transp.png">
-					<div class="chili-label">
-						{{rating.chili.name}}
-					</div>
+
+	<div *ngFor="#topChiliRating of topChiliByCategory">
+		<h2 class="text-center">{{topChiliRating.categoryName}}</h2>
+		<div class="text-center" *ngIf="!topChiliRating.topChili">
+			No ratings for this category
+		</div>
+		<div *ngIf="topChiliRating.topChili">
+			<div class="columns small-8 small-centered chili-pot">
+				<img src="../resources/crock-pot-transp.png">
+				<div class="chili-label">
+					{{topChiliRating.topChili.chili.name}}
 				</div>
-				<div class="columns small-6 stat">
-					<div class="callout" [ngClass]="{success: rating.ratingValue === 5, primary: rating.ratingValue === 4, secondary: rating.ratingValue < 4}">
-						{{rating.ratingValue}}
-						{{rating.judge.name}}
-					</div>
+				<div class="chili-rating">
+					<div>{{topChiliRating.topChili.average}}</div>
 				</div>
 			</div>
 		</div>

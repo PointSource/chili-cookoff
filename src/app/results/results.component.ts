@@ -4,10 +4,12 @@ import {Rating} from '../rating/rating';
 
 @Component({
 	selector: 'results',
-	templateUrl: 'app/results/results.component.html'
+	templateUrl: 'app/results/results.component.html',
+	styleUrls: ['app/results/results.component.css']
 })
 export class ResultsComponent implements OnInit {
-	public ratingsByCategory:Rating[] = [];
+	public ratingsByCategory: Rating[] = [];
+	public topChiliByCategory: any[] = [];
 
 	constructor(
 		private _ratingService: RatingService) {}
@@ -15,6 +17,12 @@ export class ResultsComponent implements OnInit {
 	ngOnInit() {
 		this._ratingService.getRatingsForAllCategories().then(ratingsByCategory => {
 			this.ratingsByCategory = ratingsByCategory;
+		});
+
+
+		this._ratingService.getTopChiliForAllCategories().then(topChiliByCategory => {
+			this.topChiliByCategory = topChiliByCategory;
+			console.log(this.topChiliByCategory);
 		});
 
 	}
