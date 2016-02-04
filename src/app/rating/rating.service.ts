@@ -17,11 +17,11 @@ export class RatingService {
 		return Promise.resolve(this.ratings);
 	}
 
-	addRatingSet(ratings: Rating[]) {
-		if (!this.hasRatingForChili(ratings[0].chili.id, ratings[0].judge)) {
-			this.ratings = this.ratings.concat(ratings);
-		}
-	}
+	// addRatingSet(ratings: Rating[]) {
+	// 	if (!this.hasRatingForChili(ratings[0].chili.id, ratings[0].judge)) {
+	// 		this.ratings = this.ratings.concat(ratings);
+	// 	}
+	// }
 
 	hasRatingForChili(chiliId: number, judge: Judge) : boolean {
 		var filteredRatings = this.ratings.filter(h =>
@@ -31,32 +31,34 @@ export class RatingService {
 	}
 
 	createRatingSetForChili(chili: Chili, judge: Judge) {
-		var ratings: Rating[] = [];
+		var rating: Rating = {
+			chili: chili,
+			judge: judge,
+			ratingEntries: []
+		}
 
 		return this._categoryService.getCategories().then(categories => {
 
 			categories.forEach(category => {
-				ratings.push({
+				rating.ratingEntries.push({
 					ratingValue: null,
-					category: category,
-					chili: chili,
-					judge: judge
+					category: category
 				});
 			});
 
-			return ratings;
+			return rating;
 		});
 	}
 
-	getRatingSetForChili(chili: Chili, judge: Judge) {
-		var ratings:Rating[] = this.ratings.filter(h => 
+	getRatingForChili(chili: Chili, judge: Judge) {
+		var rating = this.ratings.find(h => 
 			h.chili.id === chili.id && h.judge.id === judge.id
 		);
 
-		if (ratings.length === 0) {
+		if (rating === undefined) {
 			return this.createRatingSetForChili(chili, judge);
 		}
-		else return Promise.resolve(ratings);
+		else return Promise.resolve(rating);
 	}
 
 	getRatingsForAllCategories() {
