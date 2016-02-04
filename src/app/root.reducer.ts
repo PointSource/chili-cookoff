@@ -1,7 +1,10 @@
-import {judgeReducer} from './judges/judge.reducer';
+import {judges} from './judges/judge.reducer';
+import {chilis} from './chili/chili.reducer';
+import {combineReducers} from '../lib/redux.js'
 
-export function rootReducer(state = {}, action) {
-	return {
-		judges: judgeReducer(state.judges, action),
-	}
-};
+const rootReducer = combineReducers({
+	judges,
+	chilis
+})
+
+export default rootReducer;

@@ -1,4 +1,4 @@
-import {Judge} from '../judges/judge';
+import {Judge} from './judge';
 
 export const SET_CURRENT_JUDGE = 'SET_CURRENT_JUDGE';
 export const SET_JUDGE_LIST = 'SET_JUDGE_LIST';

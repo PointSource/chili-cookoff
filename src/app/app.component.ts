@@ -1,13 +1,9 @@
-import {Component, Inject, OnInit} from 'angular2/core';
+import {Component, Inject} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {JudgeComponent} from './judges/judge.component'
 import {ChiliListComponent} from './chili/chili-list.component';
-// import {RatingComponent} from './rating/rating.component'
 import {CategoryService} from './rating/category.service';
-import {JudgeService} from './judges/judge.service';
-import {ChiliService} from './chili/chili.service';
 import {RatingService} from './rating/rating.service';
-import {JudgeActions} from './judges/judge.actions'
 
 @Component({
 	selector: 'my-app',
@@ -18,9 +14,7 @@ import {JudgeActions} from './judges/judge.actions'
 	],
 	providers: [
 		CategoryService, 
-		ChiliService, 
-		RatingService, 
-		JudgeService
+		RatingService
 	]
 })
 @RouteConfig([
@@ -32,22 +26,11 @@ import {JudgeActions} from './judges/judge.actions'
 	// { path: '/chili/:id', name: 'ChiliDetail', component: ChiliDetailComponent },
 ])
 
-export class AppComponent implements OnInit {
+export class AppComponent {
 	public title = 'Cookoff!!';
 
 	constructor(
-		@Inject('AppStore') private _appStore: AppStore,
-		private _judgeActions: JudgeActions,
-		private _judgeService: JudgeService
+		@Inject('AppStore') private _appStore: AppStore
 	) {}
-
-	ngOnInit() {
-		this._judgeService.getJudges().then(judges => {
-			this._appStore.dispatch(this._judgeActions.setJudgeList(judges));
-			this._appStore.dispatch(this._judgeActions.setCurrentJudge(judges[0].id))
-		});
-
-
-	}
 
 }

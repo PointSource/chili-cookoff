@@ -1,3 +1,5 @@
-<div class="row columns">Choose your judge. Current judge is [{{currentJudge.name}}]
-	<judge-selector></judge-selector>
+<div *ngIf="currentJudge">
+	<div class="row columns">Choose your judge. Current judge is [{{currentJudge.name}}]
+		<judge-selector></judge-selector>
+	</div>
 </div>
