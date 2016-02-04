@@ -5,7 +5,44 @@ var initialRatingList: Rating[] = [];
 
 const initialState = {
 	ratingList: initialRatingList,
-	chilisRatedByJudge: {}
+	chilisRatedByJudge: {},
+	ratingsByCategory: {},
+	chiliCategoryTotals: []
+}
+
+function chiliCategoryTotals(state = initialState.chiliCategoryTotals, action) {
+	switch (action.type) {
+		case ADD_RATING:
+
+
+		default:
+			return state;
+	}
+}
+
+function ratingsByCategory(state = initialState.ratingsByCategory, action) {
+	switch (action.type) {
+		case ADD_RATING:
+
+			var newRatingsByCategory = Object.assign({}, state);
+
+			action.rating.ratingEntries.forEach(ratingValue => {
+				var ratingForCategory = []
+				// If this category has not been rated yet, create a new entry
+				if (!state[ratingValue.category.id]) {
+					newRatingsByCategory[ratingValue.category.id] = [Object.assign({}, action.rating)];
+				} else {
+					newRatingsByCategory[ratingValue.category.id] = [
+						...state[ratingValue.category.id],
+						Object.assign({}, action.rating)
+					];
+				}
+			});
+
+			return newRatingsByCategory;
+		default:
+			return state;
+	}
 }
 
 function chilisRatedByJudge(state = initialState.chilisRatedByJudge, action) {
@@ -44,7 +81,9 @@ export function rating(state = initialState, action) {
 					...state.ratingList,
 					action.rating
 				],
-				chilisRatedByJudge: chilisRatedByJudge(state.chilisRatedByJudge, action)
+				chilisRatedByJudge: chilisRatedByJudge(state.chilisRatedByJudge, action),
+				ratingsByCategory: ratingsByCategory(state.ratingsByCategory, action)
+				chiliCategoryTotals: chiliCategoryTotals(state.chiliCategoryTotals, action)
 			});
 		default: 
 			// mandatory for sanity (Eg: initialisation)

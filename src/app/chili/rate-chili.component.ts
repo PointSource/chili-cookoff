@@ -38,15 +38,18 @@ export class RatingComponent implements OnInit {
             var ratingList = this._appStore.getState().rating.ratingList;
             var foundRating = ratingList.find(rating =>
                 rating.chili.id === this.chili.id && rating.judge.id === this.currentJudge.id
-                );
+            );
 
             if (foundRating === undefined) {
                 this._ratingService.createRatingSetForChili(this.chili, this.currentJudge).then(rating => {
                     this.rating = rating;
+
+                    // TODO: Have to copy this so that we don't overwrite the state... may need a better approach?
                     this.ratingEntriesCopy = this.createRatingEntriesCopy(this.rating.ratingEntries);
                 });
             } else {
                 this.rating = foundRating;
+                // TODO: Have to copy this so that we don't overwrite the state... may need a better approach?
                 this.ratingEntriesCopy = this.createRatingEntriesCopy(this.rating.ratingEntries);
             }
         });
@@ -64,11 +67,11 @@ export class RatingComponent implements OnInit {
         return ratingEntriesCopy;
     }
 
-    resetRating() {
+    private resetRating() {
         this.ratingEntriesCopy.forEach(ratingEntry => ratingEntry.ratingValue = null);
     }
 
-    submitRating() {
+    private submitRating() {
         this._appStore.dispatch(this._ratingActions.addRating(
             Object.assign({}, this.rating, {
                 ratingEntries: this.ratingEntriesCopy
@@ -77,7 +80,7 @@ export class RatingComponent implements OnInit {
         console.log(this._appStore.getState().rating);
     }
 
-    allRatingsFilled() {
+    private allRatingsFilled() {
         var ratingsFilled: number = 0;
         this.ratingEntriesCopy.forEach(ratingEntry => {
             if (ratingEntry.ratingValue !== null) {
