@@ -1,4 +1,4 @@
-import {Component, Inject} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {JudgeComponent} from './judges/judge.component'
 import {ChiliListComponent} from './chili/chili-list.component';
@@ -28,9 +28,4 @@ import {RatingService} from './rating/rating.service';
 
 export class AppComponent {
 	public title = 'Cookoff!!';
-
-	constructor(
-		@Inject('AppStore') private _appStore: AppStore
-	) {}
-
 }
