@@ -9,7 +9,10 @@ import {JudgeActions} from './judge.actions'
   	directives: [
 		JudgeSelectorComponent
 	],
-	providers: [JudgeService]
+	providers: [
+		JudgeService,
+		JudgeActions
+	]
 })
 export class JudgeComponent implements OnInit {
 	public currentJudge: number;

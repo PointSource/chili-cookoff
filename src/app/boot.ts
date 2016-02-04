@@ -5,13 +5,11 @@ import {AppComponent} from './app.component';
 
 import {createStore} from '../lib/redux.js'
 import * as rootReducer from './root.reducer';
-import {JudgeActions} from './judges/judge.actions'
 
 const appStore = createStore(rootReducer.default);
 
 bootstrap(AppComponent, [
   ROUTER_PROVIDERS,
   provide(LocationStrategy, {useClass: HashLocationStrategy}),
-  provide('AppStore', { useValue: appStore }),
-  JudgeActions
+  provide('AppStore', { useValue: appStore })
 ]);

@@ -4,12 +4,18 @@ import {Chili} from './chili';
 import {ChiliService} from './chili.service';
 import {ChiliActions} from './chili.actions';
 import {RatingService} from '../rating/rating.service';
+import {CategoryService} from '../rating/category.service';
 
 @Component({
     selector: 'my-dashboard',
     templateUrl: 'app/chili/chili-list.component.html',
     styleUrls: ['app/chili/chili-list.component.css'],
-    providers: [ChiliService, ChiliActions]
+    providers: [
+        ChiliService,
+        ChiliActions, 
+        RatingService,
+        CategoryService
+    ]
 })
 export class ChiliListComponent implements OnInit {
     public chilis: Chili[] = [];
