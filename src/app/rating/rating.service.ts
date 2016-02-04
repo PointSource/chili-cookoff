@@ -37,17 +37,6 @@ export class RatingService {
 		});
 	}
 
-	getRatingForChili(chili: Chili, judge: Judge) {
-		var rating = this.ratings.find(h => 
-			h.chili.id === chili.id && h.judge.id === judge.id
-		);
-
-		if (rating === undefined) {
-			return this.createRatingSetForChili(chili, judge);
-		}
-		else return Promise.resolve(rating);
-	}
-
 	getRatingsForAllCategories() {
 		var ratingsForCategories:any[] = [];
 		return this._categoryService.getCategories().then(categories => {

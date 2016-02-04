@@ -12,8 +12,8 @@ export class ChiliListComponent implements OnInit {
 
     constructor(
         @Inject('AppStore') private _appStore: AppStore,
-        private _router: Router,
-        ) { }
+        private _router: Router
+    ) { }
 
     ngOnInit() {
         this.chilis = this._appStore.getState().chilis;

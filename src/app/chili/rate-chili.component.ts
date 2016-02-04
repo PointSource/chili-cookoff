@@ -34,20 +34,28 @@ export class RatingComponent implements OnInit {
     if (!this.chili) {
       let id = +this._routeParams.get('id');
       this._chiliService.getChili(id).then(chili => {
-        this.chili = chili
-        this._ratingService.getRatingForChili(this.chili, this.currentJudge).then(rating => {
-          this.rating = rating;
-        });
+        this.chili = chili;
+        var ratingList = this._appStore.getState().rating.ratingList;
+        var foundRating = ratingList.find(rating =>
+          rating.chili.id === this.chili.id && rating.judge.id === this.currentJudge.id
+        );
+
+        if (foundRating === undefined) {
+          this._ratingService.createRatingSetForChili(this.chili, this.currentJudge).then(rating =>
+            this.rating = rating
+          );
+        } else {
+          this.rating = foundRating;
+        }
       });
     }
   }
 
-  // resetRating() {
-  //   this.rating.ratingEntries.forEach(ratingEntry => ratingEntry.ratingValue = null);
-  // }
+  resetRating() {
+    this.rating.ratingEntries.forEach(ratingEntry => ratingEntry.ratingValue = null);
+  }
 
   submitRating() {
-    console.log(this.rating);
     this._appStore.dispatch(this._ratingActions.addRating(this.rating));
     console.log(this._appStore.getState().rating);
   }
