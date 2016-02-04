@@ -28,7 +28,7 @@ export class RatingComponent implements OnInit {
       let id = +this._routeParams.get('id');
       this._chiliService.getChili(id).then(chili => {
         this.chili = chili
-        var currentJudge = this._appStore.getState().currentJudge;
+        var currentJudge = this._appStore.getState().judges.find(judge => judge.isSelected === true);
         this._ratingService.getRatingSetForChili(this.chili, currentJudge).then(ratings => {
           this.ratings = ratings
         });
