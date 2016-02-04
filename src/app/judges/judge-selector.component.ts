@@ -9,16 +9,12 @@ import {JudgeActions} from './judge.actions'
 
 export class JudgeSelectorComponent implements OnInit {
 	public judges: Judge[];
-	private unsubscribe;
 	private currentJudgeId;
 
 	constructor(
 		@Inject('AppStore') private _appStore: AppStore,
 		private _judgeActions: JudgeActions
-	) {
-		this.unsubscribe = this._appStore
-			.subscribe(() => this.updateJudge());
-	}
+	) {}
 
 	ngOnInit() {
 		this.judges = this._appStore.getState().judges;
@@ -31,6 +27,11 @@ export class JudgeSelectorComponent implements OnInit {
 	}
 
 	private updateJudge() {
-		this.currentJudgeId = this._appStore.getState().currentJudge.id;
+		let state = this._appStore.getState();
+		let selectedJudge:Judge = state.judges.find(judge => judge.isSelected === true);
+
+		if (selectedJudge !== undefined) {
+			this.currentJudgeId = selectedJudge.id;
+		}
 	}
 }

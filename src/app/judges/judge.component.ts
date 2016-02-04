@@ -13,9 +13,9 @@ export class JudgeComponent implements OnInit {
 	private unsubscribe;
 
 	constructor(
-		@Inject('AppStore') private appStore: AppStore
+		@Inject('AppStore') private _appStore: AppStore
 	) {
-		this.unsubscribe = this.appStore.subscribe(() => this.updateJudge());
+		this.unsubscribe = this._appStore.subscribe(() => this.updateJudge());
 	}
 
 	ngOnInit() {
@@ -28,8 +28,7 @@ export class JudgeComponent implements OnInit {
 	}
 
 	private updateJudge() {
-
-		let state = this.appStore.getState();
-		this.currentJudge = state.currentJudge;
+		let state = this._appStore.getState();
+		this.currentJudge = state.judges.find(judge => judge.isSelected === true);
 	}
 }
