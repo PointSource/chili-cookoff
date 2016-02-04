@@ -8,8 +8,6 @@
 		</div>
 	</div>
 
-	{{rating.ratingEntries[0].category.name}}
-
 	<rate-input [(rating)]="rating.ratingEntries[i]"  *ngFor="#ratingEntry of rating.ratingEntries; #i=index"></rate-input>
 
 	<button class="expanded button" [disabled]="!allRatingsFilled()" (click)="submitRating()">Submit Vote for {{currentJudge.name}}</button>

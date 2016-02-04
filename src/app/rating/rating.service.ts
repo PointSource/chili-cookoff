@@ -17,19 +17,6 @@ export class RatingService {
 		return Promise.resolve(this.ratings);
 	}
 
-	// addRatingSet(ratings: Rating[]) {
-	// 	if (!this.hasRatingForChili(ratings[0].chili.id, ratings[0].judge)) {
-	// 		this.ratings = this.ratings.concat(ratings);
-	// 	}
-	// }
-
-	hasRatingForChili(chiliId: number, judge: Judge) : boolean {
-		var filteredRatings = this.ratings.filter(h =>
-			h.chili.id === chiliId && h.judge.id === judge.id
-		);
-		return filteredRatings.length > 0;
-	}
-
 	createRatingSetForChili(chili: Chili, judge: Judge) {
 		var rating: Rating = {
 			chili: chili,

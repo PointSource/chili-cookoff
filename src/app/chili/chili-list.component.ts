@@ -1,7 +1,6 @@
 import {Component, OnInit, Inject} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {Chili} from './chili';
-import {RatingService} from '../rating/rating.service';
 
 @Component({
     selector: 'my-dashboard',
@@ -14,7 +13,6 @@ export class ChiliListComponent implements OnInit {
     constructor(
         @Inject('AppStore') private _appStore: AppStore,
         private _router: Router,
-        private _ratingService: RatingService
         ) { }
 
     ngOnInit() {
@@ -26,7 +24,14 @@ export class ChiliListComponent implements OnInit {
     }
 
     hasVotedOn(chili: Chili) {
-        var judge = this._appStore.getState().currentJudge;
-        return this._ratingService.hasRatingForChili(chili.id, judge);
+
+        var judge = this._appStore.getState().judges.currentJudge;
+        var chilisRatedByJudge = this._appStore.getState().rating.chilisRatedByJudge;
+        if (!chilisRatedByJudge[judge.id]) {
+            return false;
+        }
+        else {
+            return chilisRatedByJudge[judge.id].indexOf(chili.id) !== -1;
+        }
     }
 }

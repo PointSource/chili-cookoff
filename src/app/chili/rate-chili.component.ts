@@ -37,7 +37,6 @@ export class RatingComponent implements OnInit {
         this.chili = chili
         this._ratingService.getRatingForChili(this.chili, this.currentJudge).then(rating => {
           this.rating = rating;
-          console.log(rating);
         });
       });
     }
