@@ -33,26 +33,29 @@ export class RatingComponent implements OnInit {
         this.currentJudge = this._appStore.getState().judges.currentJudge;
 
         let chiliId = +this._routeParams.get('id');
-        this._chiliService.getChili(chiliId).then(chili => {
-            this.chili = chili;
-            var ratingList = this._appStore.getState().rating.ratingList;
-            var foundRating = ratingList.find(rating =>
-                rating.chili.id === this.chili.id && rating.judge.id === this.currentJudge.id
-            );
+        
+        var ratingList = this._appStore.getState().rating.ratingList;
+        var foundRating = ratingList.find(rating =>
+            rating.chili.id === chiliId && rating.judge.id === this.currentJudge.id
+        );
 
-            if (foundRating === undefined) {
-                this._ratingService.createRatingSetForChili(this.chili, this.currentJudge).then(rating => {
+        if (foundRating === undefined) {
+            this._chiliService.getChili(chiliId).then(chili => {
+                this._ratingService.createRatingSetForChili(chili, this.currentJudge).then(rating => {
                     this.rating = rating;
+                    this.chili = rating.chili;
 
                     // TODO: Have to copy this so that we don't overwrite the state... may need a better approach?
                     this.ratingEntriesCopy = this.createRatingEntriesCopy(this.rating.ratingEntries);
                 });
-            } else {
-                this.rating = foundRating;
-                // TODO: Have to copy this so that we don't overwrite the state... may need a better approach?
-                this.ratingEntriesCopy = this.createRatingEntriesCopy(this.rating.ratingEntries);
-            }
-        });
+            });
+        }
+        else {
+            this.rating = foundRating;
+            this.chili = foundRating.chili;
+            // TODO: Have to copy this so that we don't overwrite the state... may need a better approach?
+            this.ratingEntriesCopy = this.createRatingEntriesCopy(this.rating.ratingEntries);
+        }
     }
 
     private createRatingEntriesCopy(ratingEntries) {
@@ -76,8 +79,9 @@ export class RatingComponent implements OnInit {
             Object.assign({}, this.rating, {
                 ratingEntries: this.ratingEntriesCopy
             })
-            ));
-        console.log(this._appStore.getState().rating);
+        ));
+
+        console.log(this._appStore.getState().rating)
     }
 
     private allRatingsFilled() {

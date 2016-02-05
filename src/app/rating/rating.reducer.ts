@@ -6,7 +6,7 @@ var initialRatingList: Rating[] = [];
 const initialState = {
 	ratingList: initialRatingList,
 	chilisRatedByJudge: {},
-	ratingsByCategory: {},
+	ratingsByCategory: [],
 	totalRatingByChiliAndCategory: []
 }
 
@@ -45,16 +45,25 @@ function ratingsByCategory(state = initialState.ratingsByCategory, action) {
 	switch (action.type) {
 		case ADD_RATING:
 
-			var newRatingsByCategory = Object.assign({}, state);
+			var newRatingsByCategory = state.slice(0, state.length);
 
 			action.rating.ratingEntries.forEach(ratingValue => {
 				var ratingForCategory = []
+
+				var foundRatingIndex = state.findIndex(ratingByCategory => ratingByCategory.categoryId === ratingValue.category.id);
+
 				// If this category has not been rated yet, create a new entry
-				if (!state[ratingValue.category.id]) {
-					newRatingsByCategory[ratingValue.category.id] = [Object.assign({}, action.rating)];
+				if (foundRatingIndex === -1) {
+					newRatingsByCategory.push({
+						categoryName: ratingValue.category.name,
+						categoryId: ratingValue.category.id,
+						ratings: [
+							Object.assign({}, action.rating)
+						]
+					});
 				} else {
-					newRatingsByCategory[ratingValue.category.id] = [
-						...state[ratingValue.category.id],
+					newRatingsByCategory[foundRatingIndex].ratings = [
+						...state[foundRatingIndex].ratings,
 						Object.assign({}, action.rating)
 					];
 				}

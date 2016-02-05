@@ -7,6 +7,8 @@ import {JudgeComponent} from './judges/judge.component'
 import {JudgeService} from './judges/judge.service';
 import {JudgeActions} from './judges/judge.actions'
 
+import {ResultsComponent} from './results/results.component'
+
 @Component({
 	selector: 'my-app',
 	templateUrl: 'app/app.component.html',
@@ -22,7 +24,7 @@ import {JudgeActions} from './judges/judge.actions'
 @RouteConfig([
 	{ path: '/judges', name: 'Judges', component: JudgeComponent, useAsDefault: true },
 	{ path: '/chilis/...', name: 'Chilis', component: ChiliModuleComponent },
-	// { path: '/results', name: 'Results', component: ResultsComponent },
+	{ path: '/results', name: 'Results', component: ResultsComponent },
 ])
 
 export class AppComponent implements OnInit {

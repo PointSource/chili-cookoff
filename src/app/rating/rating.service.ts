@@ -39,18 +39,6 @@ export class RatingService {
 		});
 	}
 
-	getRatingsForAllCategories() {
-		var ratingsForCategories: any[] = [];
-		return this._categoryService.getCategories().then(categories => {
-			categories.forEach(category => {
-				ratingsForCategories.push({
-					ratings: this.getRatingsForCategory(category),
-					categoryName: category.name
-				});
-			});
-			return ratingsForCategories;
-		});
-	}
 
 	getTopChiliForAllCategories() {
 		var ratingsForCategories: any[] = [];
@@ -129,21 +117,5 @@ export class RatingService {
 
 	}
 
-	getRatingsForCategory(category: Category) {
-		var ratings: Rating[] = this.ratings.filter(h =>
-			h.category.id === category.id
-		);
-
-		ratings.sort((a, b) => {
-			if (a.ratingValue > b.ratingValue) {
-				return -1;
-			} else if (a.ratingValue < b.ratingValue) {
-				return 1;
-			}
-			return 0;
-		});
-
-		return ratings;
-	}
 
 }

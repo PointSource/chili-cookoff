@@ -1,5 +1,4 @@
-import {Component, OnInit} from 'angular2/core';
-import {RatingService} from '../rating/rating.service';
+import {Component, OnInit, Inject} from 'angular2/core';
 import {Rating} from '../rating/rating';
 
 @Component({
@@ -8,22 +7,20 @@ import {Rating} from '../rating/rating';
 	styleUrls: ['app/results/results.component.css']
 })
 export class ResultsComponent implements OnInit {
-	public ratingsByCategory: Rating[] = [];
+	public ratingsByCategory = [];
 	public topChiliByCategory: any[] = [];
 
 	constructor(
-		private _ratingService: RatingService) {}
+        @Inject('AppStore') private _appStore: AppStore
+		) {}
 
 	ngOnInit() {
-		this._ratingService.getRatingsForAllCategories().then(ratingsByCategory => {
-			this.ratingsByCategory = ratingsByCategory;
-		});
+		this.ratingsByCategory = this._appStore.getState().rating.ratingsByCategory;
 
-
-		this._ratingService.getTopChiliForAllCategories().then(topChiliByCategory => {
-			this.topChiliByCategory = topChiliByCategory;
-			console.log(this.topChiliByCategory);
-		});
+		// this._ratingService.getTopChiliForAllCategories().then(topChiliByCategory => {
+		// 	this.topChiliByCategory = topChiliByCategory;
+		// 	console.log(this.topChiliByCategory);
+		// });
 
 	}
 
