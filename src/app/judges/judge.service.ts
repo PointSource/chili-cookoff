@@ -7,21 +7,18 @@ import {Judge} from './judge';
 export class JudgeService {
 	public judges: Judge[] = [];
 	public selectedJudge: Judge = JUDGES[0];
-	public selectedJudgeObject: any = {
-		judge: null
-	};
 
-	getJudges() {
+	getJudges(): Promise<Judge[]> {
 		this.judges = JUDGES;
 		return Promise.resolve(this.judges);
 	}
 
-	getJudge(id: number) {
+	getJudge(id: number): Promise<Judge> {
 		return Promise.resolve(this.judges)
 			.then(judges => judges.filter(h => h.id === id)[0]);
 	}
 
-	selectJudge(id: number) {
+	selectJudge(id: number): void {
 		var filteredJudges = this.judges.filter(judge => judge.id === id);
 		if (filteredJudges.length > 0) {
 			this.selectedJudge = filteredJudges[0];
@@ -29,8 +26,6 @@ export class JudgeService {
 		else {
 			this.selectedJudge = null;
 		}
-
-		this.selectedJudgeObject.judge = this.selectedJudge;
 	}
 
 	getSelectedJudge(): Judge {

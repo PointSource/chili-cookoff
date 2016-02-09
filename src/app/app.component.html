@@ -1,12 +1,9 @@
 <div class="top-bar">
   	<div class="top-bar-left">
     	<ul class="menu">
-			<li class="menu-text">{{title}}</li>
-			<li><a [routerLink]="['Dashboard']">Chilis</a></li>
+			<li class="menu-text" [routerLink]="['Judges']">{{title}}</li>
+			<li><a [routerLink]="['ChiliList']">Chilis</a></li>
 			<li><a [routerLink]="['Results']">Results</a></li>
-	    	<li>
-				<judge-selector></judge-selector>
-			</li>
     	</ul>
   	</div>
   

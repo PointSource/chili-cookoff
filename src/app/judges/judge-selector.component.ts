@@ -15,7 +15,8 @@ export class JudgeSelectorComponent implements OnInit {
 
 	ngOnInit() {
 		this._judgeService.getJudges().then(judges => this.judges = judges);
-		this.selectedJudgeId = 1;
+		var currentJudge = this._judgeService.getSelectedJudge();
+		this.selectedJudgeId = currentJudge.id;
 	}
 
 	selectJudge(event:any) {
