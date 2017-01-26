@@ -7,12 +7,12 @@ import {Judge} from './judge';
 export class JudgeService {
 	private judges: Judge[] = [];
 
-	getJudges() {
+	getJudges(): Promise<Judge[]> {
 		this.judges = JUDGES;
 		return Promise.resolve(this.judges);
 	}
 
-	getJudge(id: number) {
+	getJudge(id: number): Promise<Judge> {
 		return Promise.resolve(this.judges)
 			.then(judges => judges.filter(h => h.id === id)[0]);
 	}
